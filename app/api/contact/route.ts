@@ -80,6 +80,13 @@ export async function POST(req: Request) {
     return NextResponse.json({ ok: false, error: "invalid body" }, { status: 400 });
   }
 
+  // 必須: 電話番号（mailForm= parm[input_main_tp] / simple_form= phone_number）。
+  // 空フォーム送信・botによる空メール送信を防ぐ最低限のサーバー側検証。
+  const phone = (fields["parm[input_main_tp]"] || fields["phone_number"] || "").trim();
+  if (!phone) {
+    return NextResponse.json({ ok: false, error: "phone required" }, { status: 400 });
+  }
+
   const adminTo = process.env.MAIL_TO || "info@pe-astra.com";
   const body = formatBody(fields);
   const submitterEmail = fields["email_address"] || fields["parm[email]"] || "";

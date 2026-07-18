@@ -3,3 +3,16 @@
  * create-next-app のデフォルト（dark mode / flex body / box-sizing リセット）は
  * テーマの見た目を壊すため撤去した。
  */
+
+/* SPメニュー: サブメニュー開閉アイコン(.ico)のタップ領域を13px→44pxに拡大。
+ * 見た目のアイコンサイズは background-size で従来の13pxのまま、中心位置も維持する。
+ * span付きセレクタで旧テーマstyle.css（読み込み順が後）より詳細度を上げている。 */
+@media screen and (max-width: 767px) {
+  #gHeader .menuBox .navi li span.ico {
+    width: 44px;
+    height: 44px;
+    right: -16px;
+    top: -10px;
+    background-size: 13px 13px;
+  }
+}

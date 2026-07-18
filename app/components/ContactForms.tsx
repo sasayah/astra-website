@@ -14,10 +14,41 @@ export default function ContactForms() {
     const forms = Array.from(
       document.querySelectorAll<HTMLFormElement>("form.mailForm, form.simple_form"),
     );
+    // 旧WPの検証JSは新環境で動かないため、必須チェックはここで行う。
+    // mailForm(/contact)は「必須」表示のある4項目、simple_formは電話番号のみ必須。
+    const REQUIRED: Record<string, [name: string, label: string][]> = {
+      mailForm: [
+        ["parm[name]", "お名前"],
+        ["parm[input_main_tp]", "ご連絡先（電話番号）"],
+        ["parm[address]", "住所"],
+        ["parm[area]", "内容"],
+      ],
+      simple_form: [["phone_number", "電話番号"]],
+    };
+    const firstMissing = (form: HTMLFormElement): [string, string] | null => {
+      const keys = form.classList.contains("mailForm") ? REQUIRED.mailForm : REQUIRED.simple_form;
+      for (const [name, label] of keys) {
+        const el = form.elements.namedItem(name);
+        if (
+          el instanceof HTMLInputElement ||
+          el instanceof HTMLTextAreaElement
+        ) {
+          if (!el.value.trim()) return [name, label];
+        }
+      }
+      return null;
+    };
     const handler = async (e: Event) => {
       const form = e.currentTarget as HTMLFormElement;
       e.preventDefault();
       e.stopImmediatePropagation();
+      const missing = firstMissing(form);
+      if (missing) {
+        alert(`「${missing[1]}」をご入力ください。`);
+        const el = form.elements.namedItem(missing[0]);
+        if (el instanceof HTMLElement) el.focus();
+        return;
+      }
       const submitters = form.querySelectorAll<HTMLButtonElement | HTMLInputElement>(
         'button[type="submit"], input[type="submit"]',
       );
