@@ -1,0 +1,904 @@
+@charset "utf-8";
+/*------------------------------------------------------------
+	トップページ
+------------------------------------------------------------*/
+.mainVisual {
+    margin-bottom: 32px;
+    position: relative;
+}
+.mainVisual .arrow li {
+    margin-top: -23px;
+    width: 46px;
+    position: absolute;
+    top: 50%;
+    cursor: pointer;
+}
+.mainVisual .arrow .prev {
+    left: 20px;
+}
+.mainVisual .arrow .next {
+    margin-top: -31px;
+    width: 63px;
+    right: 20px;
+}
+#main .content {
+    width: 1060px;
+}
+#main .content01 {
+    width: 1118px;
+}
+#main .imgText01 .img {
+    margin-right: -50px;
+    float: left;
+}
+#main .imgText01 .txtBox {
+    margin-top: 35px;
+    width: 740px;
+    float: right;
+}
+#main .imgText01 h2 {
+    margin-bottom: 9px;
+    color: #555;
+    font-size: 6rem;
+    font-weight: 900;
+}
+#main .imgText01 h2 .col {
+    color: #900000;
+}
+#main .imgText01 h2 .big {
+    font-size: 8.2rem;
+}
+#main .imgText01 h2 .sml {
+    margin-bottom: -25px;
+    display: block;
+    font-size: 3.2rem;
+}
+#main .imgText01 ul {
+}
+#main .imgText01 .txtList > li {
+    margin-right: 10px;
+    float: left;
+    width: 320px;
+}
+#main .imgText01 .txtList > li:nth-child(2n) {
+    margin-right: 0;
+    width: 340px;
+}
+#main .imgText01 li li {
+    /*margin: 12px 10px 0 25px;*/
+    margin: 0 0 12px 25px;
+    padding: 7px 5px 8px 40px;
+    color: #FFF;
+    font-size: 2.4rem;
+    font-weight: 500;
+    border-radius: 5px;
+    position: relative;
+    box-sizing: border-box;
+    background: #ff7701;
+}
+#main .imgText01 .liStyle01 {
+    background-color: #26c600;
+}
+#main .imgText01 .liStyle02 {
+    background-color: #7f00ff;
+}
+#main .imgText01 .liStyle03 {
+    background-color: #009dfe;
+}
+#main .imgText01 li li:before {
+    margin-top: -28px;
+    width: 51px;
+    height: 56px;
+    position: absolute;
+    left: -22px;
+    top: 50%;
+    background: url("img/index/icon01.png") no-repeat left center;
+    background-size: 51px 56px;
+    
+    content: "";
+}
+#main .bgBox01 {
+    margin-top: -1px;
+    padding: 50px 0 53px;
+    background: url("img/index/bg01.jpg") no-repeat center center;
+    background-size: cover;
+}
+#main .bgBox01 ul {
+    margin-top: -35px;
+}
+#main .bgBox01 li {
+    margin: 35px 2% 0 0;
+    width: 49%;
+}
+#main .bgBox01 li ul {
+    margin-top: 0;
+}
+#main .bgBox01 li:nth-child(2n) {
+    margin-right: 0;
+}
+#main .bgBox01 li h3 {
+    margin: 0 0 13px 30px;
+    padding: 2px 5px 2px 30px;
+    color: #FF7700;
+    font-size: 3.2rem;
+    font-weight: 900;
+    position: relative;
+    box-sizing: border-box;
+    border-radius: 35px;
+    background-color: #FFF;
+}
+#main .bgBox01 li h3:before {
+    margin-top: -28px;
+    width: 51px;
+    height: 56px;
+    position: absolute;
+    left: -30px;
+    top: 50%;
+    background: url("img/index/icon01.png") no-repeat left center;
+    background-size: cover;
+    
+    content: "";
+}
+#main .bgBox01 li:nth-child(3) h3 {
+    color: #1E9F00;
+}
+#main .bgBox01 li:nth-child(3) h3 .col01 {
+    color: #8000FF;
+}
+#main .bgBox01 li:nth-child(4) h3 {
+    color: #009DFF;
+}
+#main .bgBox01 li li {
+    margin: 0 0 20px 30px;
+    padding: 0 0 8px 10px;
+    width: auto;
+    color: #555;
+    font-size: 1.8rem;
+    font-weight: 500;
+    letter-spacing: -1px;
+    position: relative;
+    border-bottom: 2px dashed #aca7a4;
+}
+#main .bgBox01 li li:before {
+    margin-top: -15px;
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    left: -30px;
+    top: 50%;
+    background: url("img/index/icon02.png") no-repeat left center;
+    background-size: cover;
+    
+    content: "";
+}
+#main .bgBox01 li:nth-child(3) li:before {
+    background-image: url("img/index/icon03.png");
+}
+#main .bgBox01 li:nth-child(3) li:nth-child(2n):before {
+    background-image: url("img/index/icon04.png");
+}
+#main .bgBox01 li:nth-child(4) li:before {
+    background-image: url("img/index/icon05.png");
+}
+#main .bgBox01 .link {
+    margin: 45px auto 35px;
+    text-align: center;
+}
+#main .bgBox02 {
+    padding: 25px 0 81px;
+    background: url("img/index/bg02.jpg") no-repeat right center;
+    background-size: cover;
+}
+#main .bgBox02 .telBox {
+    margin-bottom: 0;
+}
+#main .bgBox02 .telBox .img {
+    margin-right: -50px;
+    float: left;
+}
+#main .bgBox02 .telBox .txtBox {
+    margin-top: 50px;
+    width: 758px;
+    float: right;
+}
+#main .bgBox02 .telBox .txtBox .ttl {
+    margin-bottom: 36px;
+    padding: 1px 10px;
+    max-width: 510px;
+    color: #FFF;
+    font-size: 3.2rem;
+    font-weight: 700;
+    position: relative;
+    border-radius: 35px;
+    box-sizing: border-box;
+    background-color: #ff2700;
+}
+#main .bgBox02 .telBox .txtBox .ttl:after {
+    margin-top: -17px;
+    width: 51px;
+    height: 34px;
+    position: absolute;
+    left: 27%;
+    bottom: -27px;
+    background: url("img/common/bg03.png") no-repeat left bottom;
+    background-size: cover;
+    
+    content: "";
+}
+#main .bgBox02 .tel .txt {
+    margin-top: 6px;
+    display: block;
+    color: #555;
+    font-size: 2.7rem;
+    font-weight: 700;
+}
+#main .bgBox02 .linkBox {
+    margin: 0 33px 0 50px;
+    padding: 42px 10px 20px 220px;
+    position: relative;
+    background: rgba(255,255,255,0.8);
+}
+#main .bgBox02 .linkBox .ttl {
+    padding: 10px 5px;
+    width: 320px;
+    color: #FFF;
+    font-size: 2.3rem;
+    font-weight: 900;
+    text-align: center;
+    border-radius: 35px;
+    position: absolute;
+    left: 42.5%;
+    top: -30px;
+    background-color: #16a086;
+}
+#main .bgBox02 .linkBox .img {
+    position: absolute;
+    left: -27px;
+    top: -20px;
+}
+#main .bgBox02 .linkBox li {
+    margin-right: 8px;
+    width: 366px;
+    float: left;
+}
+#main .bgBox02 .linkBox li:last-of-type {
+    margin-right: 0;
+}
+#main .reasonBox {
+    margin-bottom: 306px;
+}
+#main .reasonBox h3 {
+    margin-bottom: 4px;
+}
+#main .reasonBox h3 img {
+    margin-top: -105px;
+}
+#main .reasonBox ul {
+    margin-top: -38px;
+    -webkit-justify-content: center;
+    justify-content: center;
+}
+#main .reasonBox li {
+    margin: 38px 8px 0;
+    width: 324px;
+}
+#main .reasonBox li .photo {
+    margin-bottom: 10px;
+}
+#main .reasonBox li p {
+    margin: 0 25px;
+    font-size: 1.6rem;
+    text-align: justify;
+}
+#main .reasonBox li p .bold {
+    color: #555;
+    font-weight: 700;
+}
+#main .h3Ttl01 {
+    margin: 0 auto 28px;
+    width: 1005px;
+    text-align: center;
+}
+#main .h3Ttl01 img {
+    margin-top: -253px;
+}
+#main .bgBox03 {
+    margin-bottom: 53px;
+    padding-bottom: 88px;
+    background: url("img/common/bg04.png") repeat center center;
+    background-size: 1920px auto;
+}
+#main .bgBox03 .comAppendBox {
+    margin: 0 auto;
+    width: 1000px;
+    background: #FFF;
+}
+.comAppendBox .appendTabBox tbody td.tdSty01 {
+    font-weight: 900;
+}
+#main .headLine03 {
+    margin-bottom: 49px;
+    color: #FFF;
+    font-size: 6.4rem;
+}
+#main .headLine03 .inner {
+    background-color: #009dfe;
+}
+#main .priceBox {
+    margin-bottom: 70px;
+}
+#main .priceBox p {
+    margin: 0 88px 40px;
+    line-height: 1.6;
+    font-weight: 700;
+}
+#main .priceBox .comTable {
+    margin: 0 30px;
+}
+#main .voiceBox {
+    padding-bottom: 70px;
+    position: relative;
+}
+#main .voiceBox:before {
+    width: 623px;
+    height: 339px;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    background: url("img/index/voice_bg01.png") no-repeat left bottom;
+    background-size: cover;
+    
+    content: "";
+}
+#main .voiceBox:after {
+    width: 660px;
+    height: 347px;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    background: url("img/index/voice_bg02.png") no-repeat left bottom;
+    background-size: cover;
+    
+    content: "";
+}
+#main .voiceBox h3 {
+    margin-bottom: 65px;
+    padding: 35px 10px 20px;
+    text-align: center;
+    background-color: #fff2d8;
+}
+#main .voiceBox .content {
+    width: 940px;
+    position: relative;
+    z-index: 1;
+}
+#main .voiceBox .comVoiceList {
+    margin-bottom: 38px;
+}
+#main .voiceBox .comVoiceList li {
+    margin-right: 18px;
+    width: 301px;
+}
+#main .voiceBox .comVoiceList li .photo {
+    margin-bottom: 24px;
+}
+#main .voiceBox .comVoiceList li .photo img {
+    width: 100%;
+}
+#main .voiceBox .comVoiceList li .ttl {
+    margin-bottom: 16px;
+    padding-right: 92px;
+    position: relative;
+    font-size: 1.5rem;
+}
+#main .voiceBox .comVoiceList li p {
+    color: #555;
+    font-weight: 700;
+}
+#main .voiceBox .comVoiceList li .ttl .date {
+    margin-bottom: -6px;
+}
+#main .voiceBox .comVoiceList li .ttl .txt {
+    display: block;
+    position: absolute;
+    right: -8px;
+    top: 3px;
+}
+#main .voiceBox .comVoiceList li .ttl .txt .inn {
+    padding: 5px 8px;
+    display: block;
+    color: #FFF;
+    font-size: 1.5rem;
+    background-color: #ff7701;
+}
+#main .voiceBox .comVoiceList li .ttl .col01 {
+    background-color: #26c600;
+}
+#main .voiceBox .comVoiceList li:nth-child(3n) {
+    margin-right: 0;
+}
+#main .voiceBox .comVoiceList li .button {
+    width: 272px;
+}
+#main .blogBox {
+    padding: 40px 0;
+    text-align: center;
+    border-top: 30px solid #fff2d8;
+}
+#main .blogBox a {
+    width: 587px;
+    display: inline-block;
+    vertical-align: top;
+}
+#main .ihinseiriBox {
+    padding-top: 70px;
+    position: relative;
+    z-index: 1;
+    border-top: 30px solid #fff2d8;
+}
+#main .ihinseiriBox .headLine03 {
+    margin-bottom: 43px;
+    font-size: 4.8rem;
+}
+#main .ihinseiriBox .headLine03 .inner {
+    padding: 3px 45px 6px;
+    background-color: #005e9b;
+}
+#main .ihinseiriBox .comPhotoList {
+    margin: 0 25px;
+}
+#main .ihinseiriBox .comPhotoList li {
+    margin-right: 19px;
+    width: 238px;
+}
+#main .ihinseiriBox .comPhotoList li:nth-child(4n) {
+    margin-right: 0;
+}
+.comPhotoList li .pho {
+    margin-bottom: 13px;
+}
+#main .ihinseiriBox .comPhotoList li .pho:after {
+    margin-top: -12px;
+    right: -30px;
+    width: 22px;
+    height: 25px;
+    background-image: url("img/index/icon06.png");
+    background-size: cover;
+}
+#main .ihinseiriBox .comPhotoList li:nth-child(4n) .pho:after {
+    display: none;
+}
+#main .ihinseiriBox .comPhotoList li .ttl {
+    margin-bottom: 12px;
+    font-size: 2.4rem;
+    min-width: 180px;
+}
+#main .ihinseiriBox .comPhotoList li .ttl .step {
+    padding: 10px 0 12px;
+}
+#main .ihinseiriBox .comPhotoList li p .sml {
+    margin-top: 8px;
+}
+#main .ihinseiriBox .comPhotoList li p {
+    color: #555;
+}
+
+@media all and (max-width: 767px) {
+    .mainVisual {
+        margin-bottom: 0;
+        height: auto;
+    }
+    .mainVisual .arrow {
+        display: none;
+    }
+    #main .content {
+        margin: 0;
+        width: auto;
+    }
+    #main .content01 {
+        width: auto;
+    }
+    #main .imgText01 {
+        padding: 15px 17px 28px;
+        position: relative;
+        overflow: hidden;
+    }
+    #main .imgText01 .img {
+        margin-right: 0;
+        width: 226px;
+        float: none;
+        position: absolute;
+        left: -36px;
+        bottom: 0;
+    }
+    #main .imgText01 .txtBox {
+        margin-top: 0;
+        width: auto;
+        float: none;
+    }
+    #main .imgText01 h2 {
+        margin-bottom: 12px;
+        font-size: 2.7rem;
+        text-align: center;
+    }
+    #main .imgText01 h2 .big {
+        font-size: 3.7rem;
+    }
+    #main .imgText01 h2 .sml {
+        margin-bottom: -10px;
+        font-size: 1.4rem;
+    }
+    #main .imgText01 ul {
+        margin: 0;
+        display: block;
+    }
+    #main .imgText01 .txtList > li {
+        margin: 0 0 12px;
+        width: auto;
+        float: none;
+    }
+    #main .imgText01 .txtList > li:nth-child(2n) {
+        width: auto;
+    }
+    #main .imgText01 .txtList li:last-of-type {
+        margin-bottom: 0;
+    }
+    #main .imgText01 li li {
+        margin: 0 0 7px 145px;
+        padding: 5px 5px 5px 28px;
+        width: auto;
+        font-size: 1.45rem;
+        border-radius: 5px;
+    }
+    #main .imgText01 li li:before {
+        margin-top: -17px;
+        width: 31px;
+        height: 35px;
+        left: -10px;
+        background-size: cover;
+    }
+    #main .bgBox01 {
+        margin-top: 0;
+        padding: 27px 20px 35px;
+        background: #e8e8e8;
+    }
+    #main .bgBox01 ul {
+        margin-top: 0;
+        display: block;
+    }
+    #main .bgBox01 li {
+        margin: 0 0 27px;
+        width: auto;
+    }
+    #main .bgBox01 li:last-of-type {
+        margin-bottom: 0;
+    }
+    #main .bgBox01 li ul {
+        margin-top: 0;
+    }
+    #main .bgBox01 li h3 {
+        margin: 0 0 12px 10px;
+        padding: 2px 5px 2px 30px;
+        font-size: 2rem;
+    }
+    #main .bgBox01 li h3:before {
+        margin-top: -18px;
+        width: 33px;
+        height: 37px;
+        left: -15px;
+        background-image: url("img/index/sp_icon01.png");
+        background-size: cover;
+    }
+    #main .bgBox01 li li {
+        margin: 0 0 10px 10px;
+        padding: 0 0 3px 5px;
+        width: auto;
+        font-size: 1.2rem;
+        border-width: 1px;
+    }
+    #main .bgBox01 li li:before {
+        margin-top: -8px;
+        width: 15px;
+        height: 15px;
+        left: -15px;
+    }
+    #main .bgBox01 .link {
+        margin: 30px auto 0;
+        width: 73%;
+    }
+    #main .bgBox02 {
+        padding: 37px 20px 0;
+        background-image: url("img/index/sp_bg02.jpg");
+    }
+    #main .bgBox02 .telBox {
+        margin-bottom: 0;
+    }
+    #main .bgBox02 .telBox .img {
+        margin: 0 0 0 -8px;
+        width: 41%;
+        float: none;
+        position: relative;
+        z-index: 1;
+    }
+    #main .bgBox02 .telBox .txtBox {
+        margin: 0 0 2px;
+        width: auto;
+        float: none;
+    }
+    #main .bgBox02 .telBox .txtBox .ttl {
+        margin-bottom: 16px;
+        padding: 0 10px 0;
+        max-width: inherit;
+        font-size: 2.15rem;
+        text-align: center;
+        font-weight: 700;
+        border-radius: 10px;
+    }
+    #main .bgBox02 .telBox .txtBox .ttl:after {
+        margin-top: -8px;
+        width: 24px;
+        height: 16px;
+        left: 27.5%;
+        bottom: -12px;
+    }
+    #main .bgBox02 .tel a img {
+        width: 100%;
+        max-width: 335px; 
+    }
+    #main .bgBox02 .tel .txt {
+        margin: 2px 0 0 38px;
+        font-size: 1.2rem;
+    }
+    #main .bgBox02 .linkBox {
+        margin: -22px -20px 0;
+        padding: 25px 8px 15px;
+    }
+    #main .bgBox02 .linkBox .ttl {
+        margin-left: -100px;
+        padding: 5px 5px;
+        width: 200px;
+        font-size: 1.45rem;
+        border-radius: 10px;
+        left: 50%;
+        top: -18px;
+        z-index: 1;
+    }
+    #main .bgBox02 .linkBox .img {
+        display: none;
+    }
+    #main .bgBox02 .linkBox li {
+        margin-right: 1%;
+        width: 49.5%;
+    }
+    #main .bgBox02 .linkBox li:last-of-type {
+        margin-right: 0;
+    }
+    #main .reasonBox {
+        margin: 0 0 70px;
+    }
+    #main .reasonBox h3 {
+        margin-bottom: 20px;
+    }
+    #main .reasonBox h3 img {
+        margin-top: 0;
+        width: 100%;
+        max-width: 375px;
+    }
+    #main .reasonBox ul {
+        margin: -30px 16px 0;
+    }
+    #main .reasonBox li {
+        margin: 30px 1% 0;
+        width: 48%;
+    }
+    #main .reasonBox li p {
+        margin: 0 12px;
+        font-size: 1.2rem;
+        letter-spacing: -1px;
+    }
+    #main .h3Ttl01 {
+        margin: 0 auto 20px;
+        width: auto;
+        text-align: center;
+    }
+    #main .h3Ttl01 img {
+        margin: 0;
+        width: 100%;
+        max-width: 365px;
+        text-align: right;
+    }
+    #main .bgBox03 {
+        margin-bottom: 44px;
+        padding-bottom: 18px;
+        min-height: inherit;
+        background-size: 960px auto;
+    }
+    #main .bgBox03 .comAppendBox {
+        margin: 0 20px;
+        width: auto;
+    }
+    #main .headLine03 {
+        margin-bottom: 25px;
+        font-size: 2.4rem;
+    }
+    #main .priceBox .headLine03 .inner {
+        line-height: 1.55;
+    }
+    #main .priceBox {
+        margin: 0 25px 40px;
+        line-height: 1.65;
+    }
+    #main .priceBox p {
+        margin: 0 0 20px;
+        line-height: 1.68;
+    }
+    #main .priceBox .comTable {
+        margin: 0;
+    }
+    #main .voiceBox {
+        padding-bottom: 42px;
+    }
+    #main .voiceBox:before {
+        display: none;
+    }
+    #main .voiceBox:after {
+        display: none;
+    }
+    #main .voiceBox h3 {
+        margin-bottom: 36px;
+        padding: 20px 10px 27px;
+        position: relative;
+    }
+    #main .voiceBox h3 .inn {
+        padding: 0 20px 8px;
+        display: inline-block;
+        border-radius: 8px;
+        background-color: #FFF;
+    }
+    #main .voiceBox h3:before {
+        width: 117px;
+        height: 95px;
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        background: url("img/index/sp_voice_bg01.png") no-repeat left bottom;
+        background-size: cover;
+        
+        content: "";
+    }
+    #main .voiceBox h3:after {
+        width: 134px;
+        height: 93px;
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        background: url("img/index/sp_voice_bg02.png") no-repeat left bottom;
+        background-size: cover;
+        
+        content: "";
+    }
+    #main .voiceBox .content {
+        margin: 0 28px;
+        width: auto;
+    }
+    #main .voiceBox .comVoiceList {
+        margin: 0 0 42px;
+        display: block;
+    }
+    #main .voiceBox .comVoiceList li {
+        margin: 0 0 13px;
+        width: auto;
+    }
+    #main .voiceBox .comVoiceList li .photo {
+        margin-bottom: 12px;
+    }
+    #main .voiceBox .comVoiceList li .txtBox {
+        margin: 0;
+         padding-bottom: 9px;
+        color: #555;
+         font-weight: 700;
+         border-bottom: 1px dotted #ededed;
+    }
+    #main .voiceBox .comVoiceList li:last-of-type .txtBox {
+        padding-bottom: 30px;
+    }
+    #main .voiceBox .comVoiceList li .ttl {
+        margin: 0 10px 13px;
+        padding-left: 88px;
+        padding-right: 0;
+        line-height: 1.5;
+    }
+    /*#main .voiceBox .comVoiceList .liStyle01 .ttl {
+        padding-left: 85px;
+    }
+    #main .voiceBox .comVoiceList .liStyle02 .ttl {
+        padding-left: 62px;
+    }*/
+    #main .voiceBox .comVoiceList li p {
+        min-height: inherit;
+        line-height: 1.65;
+    }
+    #main .voiceBox .comVoiceList li .ttl .txt { 
+        right: auto;
+        left: 0;
+        top: 5px;
+    }
+    #main .voiceBox .comVoiceList li .ttl .txt .inn {
+        padding: 4px 8px;
+        font-size: 1.25rem;
+    }
+    #main .voiceBox .comVoiceList li .ttl .date {
+        margin-bottom: -1px;
+    }
+    #main .voiceBox .comVoiceList li .button {
+        width: 186px;
+    }
+    #main .blogBox {
+        padding: 0 0 88px;
+        border-top: none;
+    }
+    #main .blogBox a {
+        width: 300px;
+    }
+    #main .ihinseiriBox {
+        margin-top: -7px;
+        padding-top: 0;
+        border-top: 15px solid #fff2d8;
+    }
+    #main .ihinseiriBox .headLine03 {
+        margin-bottom: -11px;
+        font-size: 2.4rem;
+        line-height: 1.2;
+        top: -50px;
+        position: relative;
+    }
+    #main .ihinseiriBox .headLine03 .inner {
+        padding: 10px 20px;
+    }
+    #main .ihinseiriBox .comPhotoList {
+        margin: 0 35px;
+    }
+    #main .ihinseiriBox .comPhotoList li {
+        margin-bottom: 44px;
+        margin-right: 0;
+        width: 108px;
+        width: auto;
+    }
+    #main .ihinseiriBox .comPhotoList li:last-of-type {
+        margin-bottom: 0;
+    }
+    #main .ihinseiriBox .comPhotoList li:after {
+        margin-left: -26px;
+        bottom: -32px;
+    }
+    #main .ihinseiriBox .comPhotoList li .pho {
+        margin-bottom: 0;
+        border: none;
+    }
+    #main .ihinseiriBox .comPhotoList li .pho:after {
+        display: none;
+    }
+    #main .ihinseiriBox .comPhotoList li .ttl {
+        margin-bottom: 0;
+        color: #FFF;
+        font-size: 1.2rem;
+        min-width: inherit;
+        line-height: 1.5;
+    }
+    #main .ihinseiriBox .comPhotoList li .ttl .step {
+        padding: 0;
+    }
+    .comPhotoList li p {
+        padding: 5px 20px 8px 10px;
+        line-height: 1.45;
+    }
+    #main .ihinseiriBox .comPhotoList li p .sml {
+        margin-top: 0;
+    }
+}
+
+@media all and (max-width: 374px) {
+    #main .bgBox02 .telBox .txtBox .ttl {
+        font-size: 1.8rem;
+    }
+}

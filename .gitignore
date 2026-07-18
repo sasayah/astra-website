@@ -39,3 +39,11 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Payload CMS（DBとアップロード画像は環境ごとに生成。本番はPostgres/R2）
+payload.db
+payload.db-journal
+payload.db-shm
+payload.db-wal
+/public/uploads-cms/
+payload-types.ts

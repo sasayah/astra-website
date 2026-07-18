@@ -9,9 +9,18 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@payloadcms/db-postgres": "^3.85.2",
+    "@payloadcms/db-sqlite": "^3.85.2",
+    "@payloadcms/next": "^3.85.2",
+    "@payloadcms/payload-cloud": "^3.85.2",
+    "@payloadcms/richtext-lexical": "^3.85.2",
+    "graphql": "^16.14.2",
     "next": "16.2.10",
+    "parse5": "^7.3.0",
+    "payload": "^3.85.2",
     "react": "19.2.4",
-    "react-dom": "19.2.4"
+    "react-dom": "19.2.4",
+    "sharp": "^0.35.3"
   },
   "devDependencies": {
     "@types/node": "^20",

@@ -1,0 +1,5 @@
+/*
+ * 旧テーマ ASTRA の style.css を正とするため、ここは最小限のみ。
+ * create-next-app のデフォルト（dark mode / flex body / box-sizing リセット）は
+ * テーマの見た目を壊すため撤去した。
+ */
