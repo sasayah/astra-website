@@ -42,9 +42,10 @@ export function metaOf(rel: string): Meta {
   return { ...EMPTY, ...(manifest[rel] ?? {}) };
 }
 
-/** slug配列 → content/pages 配下の相対キー。無ければ null */
+/** slug配列 → content/pages 配下の相対キー。無ければ null
+ *  URLのパスセグメントはpercent-encodedのまま渡ってくる（例: 未分類 → %E6%9C%AA...）ためデコードする */
 function relFromSlug(slug: string[]): string | null {
-  const joined = slug.join("/");
+  const joined = slug.map((s) => decodeURIComponent(s)).join("/");
   if (joined.endsWith(".html") && existsSync(path.join(PAGES, joined))) {
     return joined;
   }
