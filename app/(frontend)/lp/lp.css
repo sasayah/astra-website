@@ -171,6 +171,30 @@
   color: #cdd6e4;
 }
 
+/* 旧テーマの a:link { color:#707070 } に詳細度で勝つための明示上書き */
+.lp a.lp-tel,
+.lp a.lp-tel:link,
+.lp a.lp-tel:visited,
+.lp a.lp-tel:hover,
+.lp a.lp-tel:active,
+.lp a.lp-line,
+.lp a.lp-line:link,
+.lp a.lp-line:visited,
+.lp a.lp-line:hover,
+.lp a.lp-line:active,
+.lp-sticky a,
+.lp-sticky a:link,
+.lp-sticky a:visited,
+.lp-sticky a:hover,
+.lp-sticky a:active {
+  color: #fff;
+}
+.lp .lp-form__caption a,
+.lp .lp-form__caption a:link,
+.lp .lp-form__caption a:visited {
+  color: var(--lp-red);
+}
+
 /* 電話ボタン */
 .lp-tel {
   display: block;
