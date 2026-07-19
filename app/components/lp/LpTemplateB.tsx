@@ -1,5 +1,6 @@
 import type { LpCity, LpItem } from "@/app/lib/lp-data";
 import { SINGLE_ITEM_PRICES, priceOf, withCity } from "@/app/lib/lp-data";
+import LpDisposalOptions from "@/app/components/lp/LpDisposalOptions";
 
 const TEL = "0120-709-333";
 const TEL_HREF = "tel:0120709333";
@@ -182,54 +183,14 @@ export default function LpTemplateB({ item, city }: { item: LpItem; city?: LpCit
         <div className="lp-inner">
           <h2 className="lp-title">
             <span className="lp-title__sub">COMPARE</span>
-            自治体の粗大ごみ回収との違い
+            {item.name}の処分方法くらべ
           </h2>
           {item.recycleLawNote ? (
             <div className="lp-law" style={{ marginBottom: 16 }}>
               <p>{t(item.recycleLawNote)}</p>
             </div>
           ) : null}
-          <div className="lp-table-wrap">
-            <table className="lp-compare">
-              <thead>
-                <tr>
-                  <th></th>
-                  <th className="lp-compare__astra">アストラ</th>
-                  <th>自治体の回収</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <th>申込み</th>
-                  <td className="lp-compare__astra">
-                    <em>◎</em> 電話・LINEで即受付
-                  </td>
-                  <td>△ 事前申込・シール購入</td>
-                </tr>
-                <tr>
-                  <th>回収日</th>
-                  <td className="lp-compare__astra">
-                    <em>◎</em> 最短20分〜・日時指定OK
-                  </td>
-                  <td>× 地域の指定日のみ</td>
-                </tr>
-                <tr>
-                  <th>搬出</th>
-                  <td className="lp-compare__astra">
-                    <em>◎</em> 室内からスタッフが搬出
-                  </td>
-                  <td>× 指定場所まで自分で運ぶ</td>
-                </tr>
-                <tr>
-                  <th>買取</th>
-                  <td className="lp-compare__astra">
-                    <em>◎</em> 買取額で回収費を相殺
-                  </td>
-                  <td>× なし</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+          <LpDisposalOptions item={item} />
         </div>
       </section>
 

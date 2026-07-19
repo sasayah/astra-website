@@ -82,6 +82,27 @@ export function allSlugs(): string[][] {
   return out;
 }
 
+/** 市区町村名から、その市のブログ作業事例を新しい順に返す（地域ページの個別化用）。
+ *  記事タイトルの「{市区}の◯◯事例（YYYY年M月D日）」「{市区}にて」パターンから照合する */
+export type CityPost = { path: string; label: string };
+export function postsForCity(city: string, limit = 3): { posts: CityPost[]; total: number } {
+  const hits: { path: string; label: string; d: number }[] = [];
+  for (const [rel, meta] of Object.entries(manifest)) {
+    if (!/^(blog|未分類)\/[^/]+\.html$/.test(rel)) continue;
+    const title = meta.title ?? "";
+    const c =
+      title.match(/^(.+?)の(?:不用品回収|遺品整理)事例/)?.[1] ??
+      title.match(/^(.+?)にて/)?.[1];
+    if (c !== city) continue;
+    const dm = title.match(/（(\d{4})年(\d{1,2})月(\d{1,2})日）/);
+    const d = dm ? Number(dm[1]) * 10000 + Number(dm[2]) * 100 + Number(dm[3]) : 0;
+    const label = title.replace(/｜不用品回収アストラ$/, "").replace(/\s*\|.*$/, "");
+    hits.push({ path: "/" + rel, label, d });
+  }
+  hits.sort((a, b) => b.d - a.d);
+  return { posts: hits.slice(0, limit).map(({ path, label }) => ({ path, label })), total: hits.length };
+}
+
 /** manifestの全キー（sitemap用）。noindexページを除き、相対キー → URLパスに変換して返す */
 export function allUrlPaths(): string[] {
   return Object.keys(manifest)

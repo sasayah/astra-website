@@ -41,7 +41,11 @@ export default async function Page({
     <>
       <StaticHtml html={page.body} />
       {areaCity ? (
-        <AreaSeoSections city={areaCity} pathname={`/kansai-huyouhin/${slug[1]}`} />
+        <AreaSeoSections
+          city={areaCity}
+          slug={slug[1]}
+          pathname={`/kansai-huyouhin/${slug[1]}`}
+        />
       ) : null}
       <RunInlineScripts />
     </>

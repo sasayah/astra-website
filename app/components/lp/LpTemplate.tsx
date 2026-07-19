@@ -1,5 +1,6 @@
 import type { LpCity, LpItem } from "@/app/lib/lp-data";
 import { withCity } from "@/app/lib/lp-data";
+import LpDisposalOptions from "@/app/components/lp/LpDisposalOptions";
 
 const TEL = "0120-709-333";
 const TEL_HREF = "tel:0120709333";
@@ -273,48 +274,8 @@ export default function LpTemplate({ item, city }: { item: LpItem; city?: LpCity
               </table>
             </div>
           </details>
-          <h3 className="lp-subtitle">自治体の粗大ごみ回収との違い</h3>
-          <div className="lp-table-wrap">
-            <table className="lp-compare">
-              <thead>
-                <tr>
-                  <th></th>
-                  <th className="lp-compare__astra">アストラ</th>
-                  <th>自治体の回収</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <th>スピード</th>
-                  <td className="lp-compare__astra">
-                    <em>◎</em> 最短20分〜・即日OK
-                  </td>
-                  <td>△ 事前申込・指定日まで待つ</td>
-                </tr>
-                <tr>
-                  <th>搬出</th>
-                  <td className="lp-compare__astra">
-                    <em>◎</em> スタッフが室内から搬出
-                  </td>
-                  <td>× 指定場所まで自分で運ぶ</td>
-                </tr>
-                <tr>
-                  <th>日時指定</th>
-                  <td className="lp-compare__astra">
-                    <em>◎</em> いつでも指定OK
-                  </td>
-                  <td>× 不可（地域の指定日）</td>
-                </tr>
-                <tr>
-                  <th>費用</th>
-                  <td className="lp-compare__astra">
-                    <em>◎</em> 追加料金0円・買取相殺で総費用0円の場合も
-                  </td>
-                  <td>△ 品目ごとに手数料</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+          <h3 className="lp-subtitle">{item.name}の処分方法くらべ</h3>
+          <LpDisposalOptions item={item} />
           <div className="lp-sec__cta">
             <LineButton />
           </div>

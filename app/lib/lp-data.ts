@@ -1,4 +1,5 @@
 import lpItemsJson from "@/content/lp-items.json";
+import lpItemExtrasJson from "@/content/lp-item-extras.json";
 
 /**
  * Yahoo検索広告用の品目別LPデータ。
@@ -87,6 +88,16 @@ export const SINGLE_ITEM_PRICES: LpPriceRow[] = [
 
 export function priceOf(slug: string): LpPriceRow | undefined {
   return SINGLE_ITEM_PRICES.find((p) => p.slug === slug);
+}
+
+/** 品目別「処分方法の選び方」比較（content/lp-item-extras.json）。
+ *  一般に正しい制度・手続きの説明のみ記載し、法定料金の具体額は書かない方針。 */
+export type LpDisposalOption = { way: string; cost: string; effort: string; note: string };
+export type LpItemExtra = { intro: string; options: LpDisposalOption[] };
+export const LP_ITEM_EXTRAS = lpItemExtrasJson as Record<string, LpItemExtra>;
+
+export function extraOf(slug: string): LpItemExtra | undefined {
+  return LP_ITEM_EXTRAS[slug];
 }
 
 export function findItem(slug: string): LpItem | undefined {

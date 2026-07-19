@@ -132,3 +132,73 @@
   font-weight: 700;
   color: #fff;
 }
+
+/* 地域ページ: エリアコメント・作業事例・近隣リンク */
+.area-seo__comment {
+  background: #fff7e8;
+  border: 1px solid #eccd8b;
+  border-radius: 12px;
+  padding: 16px 18px;
+  margin-bottom: 30px;
+}
+.area-seo__comment-label {
+  display: inline-block;
+  background: #f39800;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 800;
+  border-radius: 999px;
+  padding: 2px 12px;
+  margin-bottom: 6px;
+}
+.area-seo__comment p {
+  margin: 0;
+}
+.area-seo__works {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 8px;
+}
+.area-seo__works li {
+  border-bottom: 1px dashed #e0e4ea;
+}
+.area-seo__works a,
+.area-seo__works a:link,
+.area-seo__works a:visited {
+  display: block;
+  padding: 10px 4px 10px 26px;
+  position: relative;
+  color: #1f2c47;
+  font-weight: 700;
+  text-decoration: none;
+}
+.area-seo__works a::before {
+  content: "▸";
+  position: absolute;
+  left: 6px;
+  color: #f39800;
+}
+.area-seo__neighbors {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.area-seo__neighbors a,
+.area-seo__neighbors a:link,
+.area-seo__neighbors a:visited {
+  display: inline-block;
+  background: #f6f8fa;
+  border: 1px solid #e0e4ea;
+  border-radius: 999px;
+  padding: 5px 14px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #1f2c47;
+  text-decoration: none;
+}
+.area-seo__neighbors a:hover {
+  border-color: #f39800;
+}

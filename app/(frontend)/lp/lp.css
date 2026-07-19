@@ -1139,3 +1139,104 @@
     grid-column: 1 / -1;
   }
 }
+
+/* ===== 品目別 処分方法くらべ ===== */
+.lp-options__intro {
+  font-size: 15px;
+  margin: 0 0 14px;
+}
+/* nowrap列が幅を取り「ポイント」列が潰れて縦伸びしないよう、
+ * 最低幅を確保して .lp-table-wrap の横スクロールに逃がす（PC） */
+.lp .lp-options {
+  min-width: 640px;
+}
+/* SPは横スクロール表ではなくカード型に変換（1行=1カード） */
+@media (max-width: 767px) {
+  .lp .lp-options {
+    min-width: 0;
+  }
+  .lp-options thead {
+    display: none;
+  }
+  .lp-options tbody tr {
+    display: block;
+    background: #fff;
+    border: 1px solid var(--lp-line);
+    border-radius: 10px;
+    margin-bottom: 10px;
+    overflow: hidden;
+  }
+  .lp-options tbody th,
+  .lp-options tbody td {
+    display: block;
+    border: none;
+    white-space: normal;
+  }
+  .lp-options tbody th {
+    background: var(--lp-tint);
+    font-size: 14.5px;
+    padding: 9px 14px;
+  }
+  .lp-options tbody td {
+    padding: 2px 14px;
+    font-size: 13.5px;
+  }
+  .lp-options tbody td:last-child {
+    padding-bottom: 11px;
+    color: var(--lp-muted);
+  }
+  .lp-options__cost::before {
+    content: "費用感：";
+    color: var(--lp-muted);
+    font-weight: 700;
+  }
+  .lp-options__effort {
+    text-align: left;
+  }
+  .lp-options__effort::before {
+    content: "手間：";
+    color: var(--lp-muted);
+    font-weight: 700;
+  }
+  .lp-options tr.is-astra {
+    border-color: var(--lp-red);
+  }
+  .lp-options tr.is-astra th {
+    background: #fff3f4;
+    color: var(--lp-red-dark);
+  }
+  .lp-options tr.is-astra td {
+    background: #fff;
+    font-weight: 700;
+  }
+  .lp-options tr.is-astra td:last-child {
+    color: var(--lp-text);
+  }
+}
+.lp-options tbody th {
+  background: var(--lp-tint);
+  font-size: 13.5px;
+  white-space: nowrap;
+}
+.lp-options__cost {
+  font-weight: 700;
+  white-space: nowrap;
+  font-size: 13px;
+}
+.lp-options__effort {
+  text-align: center;
+  white-space: nowrap;
+  font-size: 13px;
+}
+.lp-options td {
+  font-size: 13.5px;
+}
+.lp-options tr.is-astra th,
+.lp-options tr.is-astra td {
+  background: #fff3f4;
+  font-weight: 700;
+}
+.lp-options tr.is-astra .lp-options__cost {
+  color: var(--lp-red);
+  font-weight: 800;
+}

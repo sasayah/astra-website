@@ -1,8 +1,28 @@
 import { SINGLE_ITEM_PRICES } from "@/app/lib/lp-data";
+import { postsForCity } from "@/app/lib/content";
+import areaDataJson from "@/content/area-data.json";
 
 const TEL = "0120-709-333";
 const TEL_HREF = "tel:0120709333";
 const SITE_URL = "https://pe-astra.com";
+
+type AreaInfo = { name: string; pref: string; comment: string };
+const AREA_DATA = areaDataJson as Record<string, AreaInfo>;
+
+/** 同一県内の近隣エリア（重複slugは市区名で一意化、自分自身は除外） */
+function neighborsOf(slug: string, limit = 12): { slug: string; name: string }[] {
+  const self = AREA_DATA[slug];
+  if (!self) return [];
+  const seen = new Set<string>([self.name]);
+  const out: { slug: string; name: string }[] = [];
+  for (const [s, v] of Object.entries(AREA_DATA)) {
+    if (v.pref !== self.pref || seen.has(v.name)) continue;
+    seen.add(v.name);
+    out.push({ slug: s, name: v.name });
+    if (out.length >= limit) break;
+  }
+  return out;
+}
 
 /**
  * kansai-huyouhin/{市区町村} ページ末尾に付与するSEO強化セクション。
@@ -12,11 +32,16 @@ const SITE_URL = "https://pe-astra.com";
  */
 export default function AreaSeoSections({
   city,
+  slug,
   pathname,
 }: {
   city: string;
+  slug: string;
   pathname: string;
 }) {
+  const area = AREA_DATA[slug];
+  const works = postsForCity(city);
+  const neighbors = neighborsOf(slug);
   const faq: [string, string][] = [
     [
       `${city}はどこまで対応していますか？`,
@@ -74,6 +99,29 @@ export default function AreaSeoSections({
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonld) }}
       />
       <div className="area-seo__inner">
+        {area ? (
+          <div className="area-seo__comment">
+            <span className="area-seo__comment-label">{city}のエリア担当より</span>
+            <p>{area.comment}</p>
+          </div>
+        ) : null}
+
+        {works.total > 0 ? (
+          <>
+            <h2>{city}の作業事例（実施工ブログ）</h2>
+            <p>
+              実際に{city}でお伺いした作業の記録です（全{works.total}件）。
+            </p>
+            <ul className="area-seo__works">
+              {works.posts.map((p) => (
+                <li key={p.path}>
+                  <a href={p.path}>{p.label}</a>
+                </li>
+              ))}
+            </ul>
+          </>
+        ) : null}
+
         <h2>{city}の品目別 回収参考価格</h2>
         <p>
           {city}での単品回収の参考価格です（目安）。現地でお見積もり後に確定金額をご提示し、
@@ -130,6 +178,19 @@ export default function AreaSeoSections({
             <span>通話料無料・24時間365日受付・最短20分</span>
           </a>
         </div>
+
+        {neighbors.length > 0 && area ? (
+          <>
+            <h2>{area.pref}の近隣対応エリア</h2>
+            <ul className="area-seo__neighbors">
+              {neighbors.map((n) => (
+                <li key={n.slug}>
+                  <a href={`/kansai-huyouhin/${n.slug}`}>{n.name}の不用品回収</a>
+                </li>
+              ))}
+            </ul>
+          </>
+        ) : null}
       </div>
     </section>
   );
