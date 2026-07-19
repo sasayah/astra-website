@@ -194,6 +194,20 @@
 .lp .lp-form__caption a:visited {
   color: var(--lp-red);
 }
+/* リンク継承に頼らずspan自体にも白を明示（キャッシュや読み込み順に依存させない） */
+.lp .lp-tel__hint,
+.lp .lp-tel__num,
+.lp .lp-tel__foot,
+.lp .lp-line__main,
+.lp .lp-line__sub,
+.lp .lp-line__arrow,
+.lp .lp-line__ico,
+.lp .lp-tel__ico,
+.lp-sticky strong,
+.lp-sticky small,
+.lp-sticky .lp-sticky__ico {
+  color: #fff;
+}
 
 /* 電話ボタン */
 .lp-tel {
@@ -977,5 +991,151 @@
     width: 100%;
     box-sizing: border-box;
     border-radius: 14px 14px 0 0;
+  }
+}
+
+/* ===== B案（料金表特化型 /lp/b/...） ===== */
+
+.lpb-hero {
+  background: linear-gradient(180deg, #f0f5fb 0%, #fff 100%);
+  padding: 24px 0 30px;
+  text-align: center;
+}
+.lpb-hero__area {
+  display: inline-block;
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--lp-navy);
+  background: #fff;
+  border: 1px solid var(--lp-line);
+  border-radius: 999px;
+  padding: 4px 14px;
+  margin: 0 0 12px;
+}
+.lpb-hero__title {
+  font-size: 26px;
+  font-weight: 900;
+  margin-bottom: 16px;
+}
+
+.lpb-price-card {
+  background: #fff;
+  border: 2px solid var(--lp-red);
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(31, 44, 71, 0.12);
+  padding: 18px 16px 16px;
+  margin-bottom: 14px;
+}
+.lpb-price-card__label {
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--lp-navy);
+  margin: 0 0 2px;
+}
+.lpb-price-card__price {
+  font-size: 40px;
+  font-weight: 900;
+  color: var(--lp-red);
+  line-height: 1.2;
+  margin: 0;
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  letter-spacing: 0.01em;
+}
+.lpb-price-card__tax {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--lp-muted);
+  margin-left: 8px;
+  letter-spacing: 0;
+}
+.lpb-price-card__note {
+  font-size: 12.5px;
+  color: var(--lp-muted);
+  margin: 4px 0 0;
+}
+.lpb-price-card__zero {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  padding: 0;
+  margin: 12px 0 0;
+}
+.lpb-price-card__zero li {
+  background: var(--lp-amber-bg);
+  border: 1px solid #eccd8b;
+  border-radius: 8px;
+  font-size: 12.5px;
+  font-weight: 700;
+  padding: 4px 10px;
+}
+.lpb-price-card__zero strong {
+  color: var(--lp-red);
+  font-size: 15px;
+  margin-left: 2px;
+}
+
+.lpb-telblock {
+  display: grid;
+  gap: 10px;
+}
+.lpb-telblock__lead {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--lp-navy);
+  margin: 0 0 -2px;
+  text-align: center;
+}
+.lp-cta-card--dark .lpb-telblock__lead {
+  color: #cdd6e4;
+}
+
+.lpb-warn {
+  background: #fff2f2;
+  border-top: 3px solid var(--lp-red);
+  border-bottom: 1px solid #f3cdd1;
+  padding: 22px 0;
+}
+.lpb-warn__title {
+  font-size: 17px;
+  font-weight: 900;
+  color: var(--lp-red-dark);
+  margin: 0 0 8px;
+  text-align: center;
+}
+.lpb-warn p {
+  margin: 0;
+  font-size: 14px;
+}
+.lpb-warn strong {
+  color: var(--lp-red-dark);
+}
+
+.lpb-pricelist tbody td {
+  font-size: 14px;
+}
+.lpb-pricelist__price {
+  font-weight: 800;
+  color: var(--lp-red);
+  white-space: nowrap;
+}
+.lpb-pricelist tr.is-current td {
+  background: #fff3f4;
+}
+.lpb-pricelist tr.is-current td:first-child {
+  position: relative;
+  font-weight: 800;
+}
+
+@media (min-width: 768px) {
+  .lpb-hero__title {
+    font-size: 34px;
+  }
+  .lpb-telblock {
+    grid-template-columns: 1fr 1fr;
+    align-items: stretch;
+  }
+  .lpb-telblock__lead {
+    grid-column: 1 / -1;
   }
 }
