@@ -238,8 +238,16 @@ export default function LpTemplateB({ item, city }: { item: LpItem; city?: LpCit
             <ul className="lp-voices">
               {item.voices.map((v) => (
                 <li key={v.text}>
-                  <p>「{t(v.text)}」</p>
-                  <span>{v.meta}</span>
+                  <p>{t(v.text)}</p>
+                  <div className="lp-voices__meta">
+                    <svg className="lp-voices__ico" viewBox="0 0 24 24" aria-hidden="true">
+                      <path
+                        fill="currentColor"
+                        d="M12 12a5 5 0 1 0-5-5 5 5 0 0 0 5 5zm0 2.5c-4 0-8 2-8 4.5v2h16v-2c0-2.5-4-4.5-8-4.5z"
+                      />
+                    </svg>
+                    <span>{v.meta}</span>
+                  </div>
                 </li>
               ))}
             </ul>

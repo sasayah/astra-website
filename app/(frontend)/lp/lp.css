@@ -242,6 +242,7 @@
   letter-spacing: 0.02em;
   line-height: 1.3;
   font-family: "Helvetica Neue", Arial, sans-serif;
+  white-space: nowrap;
 }
 .lp-tel__ico {
   width: 24px;
@@ -643,27 +644,64 @@
   padding: 0;
   margin: 0;
   display: grid;
-  gap: 12px;
+  gap: 18px;
 }
 .lp-voices li {
+  position: relative;
   background: #fff;
   border: 1px solid var(--lp-line);
-  border-radius: 12px;
-  padding: 16px;
-  box-shadow: 0 2px 8px rgba(31, 44, 71, 0.06);
+  border-radius: 14px;
+  padding: 26px 20px 16px;
+  box-shadow: 0 6px 18px rgba(31, 44, 71, 0.08);
+}
+.lp-voices li::before {
+  content: "\201C";
+  position: absolute;
+  top: -14px;
+  left: 14px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--lp-orange);
+  color: #fff;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 34px;
+  line-height: 1.45;
+  text-align: center;
+  box-shadow: 0 3px 8px rgba(148, 108, 24, 0.3);
 }
 .lp-voices p {
-  margin: 0 0 8px;
+  margin: 0 0 12px;
   font-size: 15px;
+  line-height: 1.9;
 }
-.lp-voices span {
-  display: inline-block;
-  font-size: 12.5px;
-  font-weight: 700;
+.lp-voices__meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-top: 1px dashed var(--lp-line);
+  padding-top: 10px;
+}
+.lp-voices__ico {
+  width: 30px;
+  height: 30px;
+  flex: none;
+  color: #fff;
+  background: var(--lp-navy);
+  border-radius: 50%;
+  padding: 5px;
+  box-sizing: border-box;
+}
+.lp-voices__meta span {
+  font-size: 13px;
+  font-weight: 800;
   color: var(--lp-navy);
-  background: var(--lp-tint);
-  border-radius: 999px;
-  padding: 2px 12px;
+}
+
+@media (min-width: 768px) {
+  .lp-voices {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  }
 }
 
 /* ===== FAQ ===== */
@@ -943,6 +981,11 @@
   .lp-cta-card__note {
     grid-column: 1 / -1;
     text-align: center;
+  }
+  /* TelBlock（B案）は1子要素なので2カラムに割らず全幅を使わせる
+   * （内部の .lpb-telblock 自身が2カラム化する） */
+  .lp-cta-card > .lpb-telblock {
+    grid-column: 1 / -1;
   }
   .lp-line {
     height: 100%;
