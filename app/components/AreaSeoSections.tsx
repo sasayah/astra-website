@@ -1,5 +1,6 @@
 import { SINGLE_ITEM_PRICES } from "@/app/lib/lp-data";
 import { postsForCity } from "@/app/lib/content";
+import { voicesForArea } from "@/app/lib/voices";
 import areaDataJson from "@/content/area-data.json";
 
 const TEL = "0120-709-333";
@@ -159,6 +160,20 @@ export default function AreaSeoSections({
           を含む各自治体の粗大ごみ回収では引き取ってもらえません。リサイクル券の手配や指定引取場所への持ち込みが必要になりますが、
           アストラにご依頼いただければ搬出から適正な処分までまとめてお任せいただけます。
         </p>
+
+        {area ? (
+          <>
+            <h2>ご利用いただいたお客様の声</h2>
+            <ul className="area-seo__voices">
+              {voicesForArea(city, area.pref).map((v) => (
+                <li key={v.meta + v.text.slice(0, 12)}>
+                  <p>{v.text}</p>
+                  <span>{v.meta}</span>
+                </li>
+              ))}
+            </ul>
+          </>
+        ) : null}
 
         <h2>{city}の不用品回収でよくあるご質問</h2>
         <dl className="area-seo__faq">

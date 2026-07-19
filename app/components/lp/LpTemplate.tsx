@@ -1,6 +1,7 @@
 import type { LpCity, LpItem } from "@/app/lib/lp-data";
 import { withCity } from "@/app/lib/lp-data";
 import LpDisposalOptions from "@/app/components/lp/LpDisposalOptions";
+import { voicesForItem } from "@/app/lib/voices";
 
 const TEL = "0120-709-333";
 const TEL_HREF = "tel:0120709333";
@@ -366,33 +367,37 @@ export default function LpTemplate({ item, city }: { item: LpItem; city?: LpCity
         </div>
       </section>
 
-      {/* お客様の声（実在の声のみ） */}
-      {item.voices.length > 0 ? (
-        <section className="lp-sec lp-sec--tint">
-          <div className="lp-inner">
-            <h2 className="lp-title">
-              <span className="lp-title__sub">VOICE</span>
-              ご利用いただいたお客様の声
-            </h2>
-            <ul className="lp-voices">
-              {item.voices.map((v) => (
-                <li key={v.text}>
-                  <p>{t(v.text)}</p>
-                  <div className="lp-voices__meta">
-                    <svg className="lp-voices__ico" viewBox="0 0 24 24" aria-hidden="true">
-                      <path
-                        fill="currentColor"
-                        d="M12 12a5 5 0 1 0-5-5 5 5 0 0 0 5 5zm0 2.5c-4 0-8 2-8 4.5v2h16v-2c0-2.5-4-4.5-8-4.5z"
-                      />
-                    </svg>
-                    <span>{v.meta}</span>
-                  </div>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </section>
-      ) : null}
+      {/* お客様の声（品目×地域で出し分け） */}
+      {(() => {
+        const voices = voicesForItem(item.slug, city?.name, city?.pref ?? "大阪府");
+        if (voices.length === 0) return null;
+        return (
+          <section className="lp-sec lp-sec--tint">
+            <div className="lp-inner">
+              <h2 className="lp-title">
+                <span className="lp-title__sub">VOICE</span>
+                ご利用いただいたお客様の声
+              </h2>
+              <ul className="lp-voices">
+                {voices.map((v) => (
+                  <li key={v.meta + v.text.slice(0, 12)}>
+                    <p>{v.text}</p>
+                    <div className="lp-voices__meta">
+                      <svg className="lp-voices__ico" viewBox="0 0 24 24" aria-hidden="true">
+                        <path
+                          fill="currentColor"
+                          d="M12 12a5 5 0 1 0-5-5 5 5 0 0 0 5 5zm0 2.5c-4 0-8 2-8 4.5v2h16v-2c0-2.5-4-4.5-8-4.5z"
+                        />
+                      </svg>
+                      <span>{v.meta}</span>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </section>
+        );
+      })()}
 
       {/* FAQ */}
       <section className="lp-sec">

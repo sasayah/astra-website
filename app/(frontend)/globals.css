@@ -202,3 +202,54 @@
 .area-seo__neighbors a:hover {
   border-color: #f39800;
 }
+
+/* 地域ページ: お客様の声（引用符バッジ付きカード） */
+.area-seo__voices {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 8px;
+  display: grid;
+  gap: 18px;
+}
+.area-seo__voices li {
+  position: relative;
+  background: #fff;
+  border: 1px solid #e0e4ea;
+  border-radius: 14px;
+  padding: 24px 18px 14px;
+  box-shadow: 0 6px 18px rgba(31, 44, 71, 0.08);
+}
+.area-seo__voices li::before {
+  content: "\201C";
+  position: absolute;
+  top: -13px;
+  left: 14px;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: #f39800;
+  color: #fff;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 32px;
+  line-height: 1.45;
+  text-align: center;
+  box-shadow: 0 3px 8px rgba(148, 108, 24, 0.3);
+}
+.area-seo__voices p {
+  margin: 0 0 10px;
+  font-size: 14.5px;
+  line-height: 1.9;
+}
+.area-seo__voices span {
+  display: block;
+  border-top: 1px dashed #e0e4ea;
+  padding-top: 8px;
+  font-size: 12.5px;
+  font-weight: 800;
+  color: #1f2c47;
+}
+@media screen and (min-width: 768px) {
+  .area-seo__voices {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  }
+}
