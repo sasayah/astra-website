@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import StaticHtml from "@/app/components/StaticHtml";
 import RunInlineScripts from "@/app/components/RunInlineScripts";
+import AreaSeoSections from "@/app/components/AreaSeoSections";
 import { getPage, allSlugs } from "@/app/lib/content";
 import { toMetadata } from "@/app/lib/metadata";
 
@@ -31,9 +32,17 @@ export default async function Page({
   const { slug } = await params;
   const page = getPage(slug);
   if (!page) notFound();
+  // 地域ページ（kansai-huyouhin/{市区町村}）にはSEO強化セクションを追記する
+  const areaCity =
+    slug[0] === "kansai-huyouhin" && slug.length === 2
+      ? page.meta.title.match(/^(.+?)の不用品回収/)?.[1]
+      : undefined;
   return (
     <>
       <StaticHtml html={page.body} />
+      {areaCity ? (
+        <AreaSeoSections city={areaCity} pathname={`/kansai-huyouhin/${slug[1]}`} />
+      ) : null}
       <RunInlineScripts />
     </>
   );

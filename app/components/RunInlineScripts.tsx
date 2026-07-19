@@ -20,6 +20,8 @@ export default function RunInlineScripts() {
     const run = async () => {
       for (const old of scripts) {
         if (cancelled || !old.isConnected) return;
+        // 実行済みマーク（React StrictModeのeffect二重実行でconst再宣言等を起こさない）
+        if (old.hasAttribute("data-inline-ran")) continue;
         const code = old.textContent || "";
         const src = old.getAttribute("src") || "";
         // 外部CDNのjQuery再読込はスキップ。テーマは jQuery 1.9.1 前提で、新版(3.x)を
@@ -32,6 +34,7 @@ export default function RunInlineScripts() {
         for (const attr of Array.from(old.attributes)) {
           s.setAttribute(attr.name, attr.value);
         }
+        s.setAttribute("data-inline-ran", "1");
         if (src) {
           // src付きは順序保証のためロード完了(またはエラー)まで待つ
           await new Promise<void>((resolve) => {
