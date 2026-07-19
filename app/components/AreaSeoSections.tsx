@@ -1,6 +1,7 @@
 import { SINGLE_ITEM_PRICES } from "@/app/lib/lp-data";
 import { postsForCity } from "@/app/lib/content";
 import { voicesForArea } from "@/app/lib/voices";
+import GoogleRatingBadge from "@/app/components/GoogleRatingBadge";
 import areaDataJson from "@/content/area-data.json";
 
 const TEL = "0120-709-333";
@@ -164,11 +165,15 @@ export default function AreaSeoSections({
         {area ? (
           <>
             <h2>ご利用いただいたお客様の声</h2>
+            <p>Googleでたくさんの高評価をいただいております。</p>
+            <GoogleRatingBadge />
             <ul className="area-seo__voices">
               {voicesForArea(city, area.pref).map((v) => (
-                <li key={v.meta + v.text.slice(0, 12)}>
+                <li key={v.name}>
                   <p>{v.text}</p>
-                  <span>{v.meta}</span>
+                  <span>
+                    {v.name}さん（Googleのクチコミより）
+                  </span>
                 </li>
               ))}
             </ul>

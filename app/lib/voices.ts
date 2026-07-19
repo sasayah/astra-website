@@ -1,21 +1,24 @@
 import bankJson from "@/content/voice-bank.json";
 
 /**
- * お客様の声バンク。Googleレビュー調の文体で品目×地域タグ付き。
- * ※★全て仮の文面（オーナー未確認）★ 実在のGoogleクチコミ・お客様アンケートへの
- *   差し替えを前提とした placeholder。公開前にオーナーの確認を取ること。
- * 選定は「同じ市 → 同じ県 → その他」の優先順で、ページごとに決定的に回転させる
- * （同じページは常に同じ声、隣の市は違う組み合わせになる）。
+ * お客様の声バンク = Googleマップの実クチコミ（不用品回収 アストラ、★4.9・81件時点）。
+ * オーナー提供のクチコミ一覧から本文を転記（原文まま、機種依存記号のみ調整）。
+ * 品目に言及があるものは items にタグ付けし、ページごとに決定的に出し分ける。
+ * 評価値・件数を更新する場合は GOOGLE_RATING を更新すること。
  */
 export type BankVoice = {
-  city: string;
-  pref: string;
-  items: string[];
-  meta: string;
+  name: string;
   text: string;
-  /** 法人・店舗案件の声（個人向けページでは後ろに回す） */
+  items?: string[];
+  /** 法人・定期契約の声（個人向けページでは後ろに回す） */
   b2b?: boolean;
 };
+
+export const GOOGLE_RATING = { score: "4.9", count: 81 } as const;
+
+/** Googleマップのクチコミ一覧への導線（場所検索リンク） */
+export const GOOGLE_REVIEWS_URL =
+  "https://www.google.com/maps/search/?api=1&query=%E4%B8%8D%E7%94%A8%E5%93%81%E5%9B%9E%E5%8F%8E%20%E3%82%A2%E3%82%B9%E3%83%88%E3%83%A9%20%E5%A4%A7%E9%98%AA%E5%B8%82%E8%A5%BF%E6%B7%80%E5%B7%9D%E5%8C%BA%E5%BE%A1%E5%B9%A3%E5%B3%B6";
 
 const BANK = bankJson as BankVoice[];
 
@@ -25,52 +28,30 @@ function hash(s: string): number {
   return h;
 }
 
-function pick(
-  pool: BankVoice[],
-  cityName: string | undefined,
-  pref: string | undefined,
-  seed: string,
-  count: number,
-): BankVoice[] {
-  const score = (v: BankVoice) =>
-    cityName && v.city === cityName ? 0 : pref && v.pref === pref ? 1 : 2;
+function pick(pool: BankVoice[], seed: string, count: number): BankVoice[] {
   const sorted = [...pool].sort((a, b) => {
-    const d = score(a) - score(b);
-    if (d !== 0) return d;
-    // 個人向けページなので、同スコア内では法人事例（b2b）を後ろへ
+    // 個人向けページ前提: 法人の声は後ろへ
     const bb = (a.b2b ? 1 : 0) - (b.b2b ? 1 : 0);
     if (bb !== 0) return bb;
-    return hash(a.meta + seed) - hash(b.meta + seed);
+    return hash(a.name + seed) - hash(b.name + seed);
   });
-  // 同じ市の声ばかりに偏らないよう、市単位で重複を避けつつ選ぶ（足りなければ許容）
-  const out: BankVoice[] = [];
-  const usedCity = new Set<string>();
-  for (const v of sorted) {
-    if (out.length >= count) break;
-    if (usedCity.has(v.city) && score(v) > 0) continue;
-    usedCity.add(v.city);
-    out.push(v);
-  }
-  for (const v of sorted) {
-    if (out.length >= count) break;
-    if (!out.includes(v)) out.push(v);
-  }
-  return out;
+  return sorted.slice(0, count);
 }
 
-/** 品目LP用: 品目タグの一致する声を、市→県の優先で選ぶ */
+/** 品目LP用: 品目に言及のあるクチコミを優先し、残りは全体からページごとに回転 */
 export function voicesForItem(
   itemSlug: string,
   cityName?: string,
-  pref?: string,
+  _pref?: string,
   count = 2,
 ): BankVoice[] {
-  const byItem = BANK.filter((v) => v.items.includes(itemSlug));
-  const pool = byItem.length >= count ? byItem : BANK;
-  return pick(pool, cityName, pref, itemSlug + (cityName ?? ""), count);
+  const seed = itemSlug + (cityName ?? "");
+  const byItem = BANK.filter((v) => v.items?.includes(itemSlug));
+  const rest = BANK.filter((v) => !v.items?.includes(itemSlug));
+  return [...pick(byItem, seed, count), ...pick(rest, seed, count)].slice(0, count);
 }
 
-/** 地域ページ用: その市→同県の優先で選ぶ */
-export function voicesForArea(cityName: string, pref: string, count = 3): BankVoice[] {
-  return pick(BANK, cityName, pref, cityName, count);
+/** 地域ページ用: 全体からページ（市区）ごとに回転して選ぶ */
+export function voicesForArea(cityName: string, _pref: string, count = 3): BankVoice[] {
+  return pick(BANK, cityName, count);
 }

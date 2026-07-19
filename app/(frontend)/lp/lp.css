@@ -1318,3 +1318,60 @@
 .lp-works figure img {
   border-radius: 12px 12px 0 0;
 }
+
+/* Googleクチコミ評価バッジ + 声セクションのリード */
+.lp-voices__lead {
+  text-align: center;
+  font-size: 14px;
+  font-weight: 800;
+  margin: -10px 0 12px;
+}
+.lp .g-rating,
+.lp .g-rating:link,
+.lp .g-rating:visited {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  background: #fff;
+  border: 1px solid var(--lp-line);
+  border-radius: 999px;
+  padding: 10px 18px;
+  margin: 0 auto 22px;
+  width: fit-content;
+  text-decoration: none;
+  color: var(--lp-text);
+  box-shadow: 0 3px 10px rgba(31, 44, 71, 0.08);
+}
+.lp .g-rating__label {
+  font-weight: 800;
+  font-size: 15px;
+  color: #1a73e8;
+}
+.lp .g-rating__sub {
+  color: var(--lp-muted);
+  font-size: 12px;
+  margin-left: 3px;
+}
+.lp .g-rating__stars {
+  color: #fbbc04;
+  font-size: 16px;
+  letter-spacing: 1px;
+}
+.lp .g-rating__score {
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  font-size: 21px;
+  font-weight: 900;
+}
+.lp .g-rating__count {
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--lp-muted);
+}
+.lp-voices__meta small {
+  display: block;
+  font-weight: 700;
+  font-size: 11px;
+  color: var(--lp-muted);
+}

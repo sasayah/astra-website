@@ -2,6 +2,7 @@ import type { LpCity, LpItem } from "@/app/lib/lp-data";
 import { SINGLE_ITEM_PRICES, priceOf, withCity } from "@/app/lib/lp-data";
 import LpDisposalOptions from "@/app/components/lp/LpDisposalOptions";
 import { voicesForItem } from "@/app/lib/voices";
+import GoogleRatingBadge from "@/app/components/GoogleRatingBadge";
 
 const TEL = "0120-709-333";
 const TEL_HREF = "tel:0120709333";
@@ -239,9 +240,13 @@ export default function LpTemplateB({ item, city }: { item: LpItem; city?: LpCit
                 <span className="lp-title__sub">VOICE</span>
                 ご利用いただいたお客様の声
               </h2>
+              <p className="lp-voices__lead">
+                Googleでたくさんの高評価をいただいております
+              </p>
+              <GoogleRatingBadge />
               <ul className="lp-voices">
                 {voices.map((v) => (
-                  <li key={v.meta + v.text.slice(0, 12)}>
+                  <li key={v.name}>
                     <p>{v.text}</p>
                     <div className="lp-voices__meta">
                       <svg className="lp-voices__ico" viewBox="0 0 24 24" aria-hidden="true">
@@ -250,7 +255,9 @@ export default function LpTemplateB({ item, city }: { item: LpItem; city?: LpCit
                           d="M12 12a5 5 0 1 0-5-5 5 5 0 0 0 5 5zm0 2.5c-4 0-8 2-8 4.5v2h16v-2c0-2.5-4-4.5-8-4.5z"
                         />
                       </svg>
-                      <span>{v.meta}</span>
+                      <span>
+                        {v.name}さん<small>Googleのクチコミより</small>
+                      </span>
                     </div>
                   </li>
                 ))}
