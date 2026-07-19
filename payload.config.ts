@@ -6,6 +6,7 @@ import { sqliteAdapter } from "@payloadcms/db-sqlite";
 import { postgresAdapter } from "@payloadcms/db-postgres";
 import { s3Storage } from "@payloadcms/storage-s3";
 import sharp from "sharp";
+import { migrations } from "./migrations";
 
 import { Users } from "./collections/Users";
 import { Media } from "./collections/Media";
@@ -14,11 +15,18 @@ import { Voice } from "./collections/Voice";
 
 const dirname = path.dirname(fileURLToPath(import.meta.url));
 
-// DATABASE_URI が postgres:// なら本番Postgres、それ以外はローカルSQLite
+// DATABASE_URI が postgres:// なら本番Postgres、それ以外はローカルSQLite。
+// 本番(Postgres)は起動時に prodMigrations が未適用分を自動適用する。
+// migrations/ はPostgres方言で生成済み（ローカルsqlite開発はdevの自動pushで不要）。
 const dbUri = process.env.DATABASE_URI || "file:./payload.db";
+const migrationDir = path.resolve(dirname, "migrations");
 const db = dbUri.startsWith("postgres")
-  ? postgresAdapter({ pool: { connectionString: dbUri } })
-  : sqliteAdapter({ client: { url: dbUri } });
+  ? postgresAdapter({
+      pool: { connectionString: dbUri },
+      migrationDir,
+      prodMigrations: migrations,
+    })
+  : sqliteAdapter({ client: { url: dbUri }, migrationDir });
 
 // 管理画面からのアップロード画像の保存先。
 // S3_* が設定されていれば Railway Bucket（S3互換）へ保存（再デプロイで消えない）。
