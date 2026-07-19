@@ -43,7 +43,7 @@ function TelBlock() {
           <IcoPhone className="lp-tel__ico" />
           {TEL}
         </span>
-        <span className="lp-tel__foot">最短20分で駆けつけ・お見積もりだけでもOK</span>
+        <span className="lp-tel__foot">お見積もりだけでもOK・営業のお電話は一切しません</span>
       </a>
       <a className="lp-line" href={LINE_URL} target="_blank" rel="noopener">
         <IcoLine className="lp-line__ico" />
@@ -69,7 +69,7 @@ export default function LpTemplateB({ item, city }: { item: LpItem; city?: LpCit
         <div className="lp-inner">
           <p className="lpb-hero__area">
             {area}
-            {city ? "" : "・関西一円"}対応｜大阪市役所で紹介中・総合実績10,000件
+            {city ? "" : "・関西一円"}対応｜西淀川区役所サイネージ掲載・総合実績10,000件
           </p>
           <h1 className="lpb-hero__title">
             {area}の{item.name}
@@ -142,7 +142,7 @@ export default function LpTemplateB({ item, city }: { item: LpItem; city?: LpCit
             </table>
           </div>
           <p className="lp-works__note">
-            ※料金は目安です。想定以上に作業時間がかかる場合は料金が変わります。現地調査後のお見積もりで確定金額をご提示し、確定後の追加料金は0円です。
+            ※上記は目安です。設置状況・搬出経路を現地で確認のうえ、<strong>作業前に確定金額をご提示</strong>します。ご提示後の追加料金は0円。金額にご納得いただけなければ、その場でお断りいただけます（お見積もりは0円です）。
           </p>
           <details className="lp-room-prices">
             <summary>全品目の参考価格表を見る（家電・家具・寝具・事務用品ほか）</summary>

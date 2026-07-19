@@ -63,7 +63,7 @@ function TelButton() {
         <IcoPhone className="lp-tel__ico" />
         {TEL}
       </span>
-      <span className="lp-tel__foot">最短20分で駆けつけ・お見積もりだけでもOK</span>
+      <span className="lp-tel__foot">お見積もりだけでもOK・営業のお電話は一切しません</span>
     </a>
   );
 }
@@ -99,7 +99,7 @@ export default function LpTemplate({ item, city }: { item: LpItem; city?: LpCity
         <div className="lp-inner">
           <p className="lp-hero__badge">
             <IcoCheck className="lp-hero__badge-ico" />
-            大阪市役所で紹介中の安心サービス
+            大阪市西淀川区役所のサイネージで紹介中
           </p>
           <h1 className="lp-hero__title">{t(item.h1)}</h1>
           <ul className="lp-merits">
@@ -131,9 +131,9 @@ export default function LpTemplate({ item, city }: { item: LpItem; city?: LpCity
       <div className="lp-stats">
         <div className="lp-inner lp-stats__row">
           <div className="lp-stats__item">
-            <span className="lp-stats__label">業界最安値</span>
+            <span className="lp-stats__label">総合実績</span>
             <span className="lp-stats__value">
-              No.<em>1</em>
+              <em>10,000</em>件
             </span>
           </div>
           <div className="lp-stats__item">
@@ -143,9 +143,9 @@ export default function LpTemplate({ item, city }: { item: LpItem; city?: LpCity
             </span>
           </div>
           <div className="lp-stats__item">
-            <span className="lp-stats__label">総合実績</span>
+            <span className="lp-stats__label">電話受付</span>
             <span className="lp-stats__value">
-              <em>10,000</em>件
+              <em>24</em>時間365日
             </span>
           </div>
         </div>
@@ -188,8 +188,7 @@ export default function LpTemplate({ item, city }: { item: LpItem; city?: LpCity
           <ol className="lp-reasons">
             {[
               ...item.points,
-              "女性スタッフ在籍。丁寧・迅速な対応を心がけています。",
-              "日時指定OK・電話受付は24時間年中無休。お急ぎにも対応します。",
+              "女性スタッフ在籍。女性のおひとり暮らしやご年配の方のお宅への訪問も安心です。",
             ].map((p, i) => (
               <li key={p}>
                 <span className="lp-reasons__num">{String(i + 1).padStart(2, "0")}</span>
@@ -234,7 +233,7 @@ export default function LpTemplate({ item, city }: { item: LpItem; city?: LpCity
             {item.name}
             1点だけでも喜んでお伺いします。サイズ・階数・搬出経路を確認のうえ、
             <strong>作業前にその場で確定金額</strong>
-            をご提示。作業後の追加料金は0円です。
+            をご提示。確定後の追加料金は0円で、金額にご納得いただけなければその場でお断りいただけます（お見積もりは0円です）。
           </p>
           <div className="lp-trucks">
             <img
@@ -277,6 +276,9 @@ export default function LpTemplate({ item, city }: { item: LpItem; city?: LpCity
           <h3 className="lp-subtitle">{item.name}の処分方法くらべ</h3>
           <LpDisposalOptions item={item} />
           <div className="lp-sec__cta">
+            <p className="lp-cta-lead">今お電話いただければ、最短20分でお伺いできます</p>
+            <TelButton />
+            <p className="lp-cta-sub">＼電話が苦手な方は／</p>
             <LineButton />
           </div>
         </div>
@@ -290,16 +292,22 @@ export default function LpTemplate({ item, city }: { item: LpItem; city?: LpCity
             実際の作業事例
           </h2>
           <div className="lp-works">
-            <img
-              src={`${UP}/2021/07/works1.jpg`}
-              alt="作業事例ビフォーアフター: 1R 3人2時間作業 合計55,000円"
-              loading="lazy"
-            />
-            <img
-              src={`${UP}/2021/07/works2.jpg`}
-              alt="作業事例ビフォーアフター: 3LDK 4人3時間作業 小計175,000円から買取25,000円を差し引き合計150,000円"
-              loading="lazy"
-            />
+            <figure>
+              <img
+                src={`${UP}/2021/07/works1.jpg`}
+                alt="作業事例ビフォーアフター: 1R 3人2時間作業 合計55,000円"
+                loading="lazy"
+              />
+              <figcaption>1R・スタッフ3名/2時間 → 合計55,000円</figcaption>
+            </figure>
+            <figure>
+              <img
+                src={`${UP}/2021/07/works2.jpg`}
+                alt="作業事例ビフォーアフター: 3LDK 4人3時間作業 小計175,000円から買取25,000円を差し引き合計150,000円"
+                loading="lazy"
+              />
+              <figcaption>3LDK・スタッフ4名/3時間 → 買取▲25,000円で合計150,000円</figcaption>
+            </figure>
           </div>
           <p className="lp-works__note">
             ※当社が実際に行った作業と実際の料金です。買取品がある場合は回収費用から差し引きます。

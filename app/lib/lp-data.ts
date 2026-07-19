@@ -71,7 +71,7 @@ export const SINGLE_ITEM_PRICES: LpPriceRow[] = [
   { slug: "reizouko", name: "冷蔵庫", price: "6,000円〜" },
   { slug: "sentakuki", name: "洗濯機", price: "5,000円〜" },
   { slug: "tv", name: "テレビ", price: "4,000円〜", note: "液晶・ブラウン管どちらもOK" },
-  { slug: "aircon", name: "エアコン", price: "1,500円〜" },
+  { slug: "aircon", name: "エアコン", price: "1,500円〜", note: "取り外しが必要な場合は見積もり時にご提示" },
   { slug: "mattress", name: "マットレス", price: "3,000円〜", note: "シングル。ダブルは5,000円〜" },
   { slug: "bed", name: "ベッドフレーム", price: "3,000円〜", note: "引き出し付きは4,000円〜" },
   { slug: "tansu", name: "タンス", price: "3,000円〜" },

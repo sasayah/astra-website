@@ -1240,3 +1240,38 @@
   color: var(--lp-red);
   font-weight: 800;
 }
+
+/* 中盤CTA（電話主・LINE従）のマイクロコピー */
+.lp-cta-lead {
+  text-align: center;
+  font-size: 15px;
+  font-weight: 800;
+  margin: 0 0 10px;
+}
+.lp-cta-sub {
+  text-align: center;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--lp-muted);
+  margin: 12px 0 8px;
+}
+
+/* 作業事例のキャプション（実額を明示） */
+.lp-works figure {
+  margin: 0;
+}
+.lp-works figcaption {
+  font-size: 13.5px;
+  font-weight: 800;
+  color: var(--lp-navy);
+  background: #fff;
+  border: 1px solid var(--lp-line);
+  border-top: none;
+  border-radius: 0 0 12px 12px;
+  padding: 8px 12px;
+  margin-top: -12px;
+  position: relative;
+}
+.lp-works figure img {
+  border-radius: 12px 12px 0 0;
+}
