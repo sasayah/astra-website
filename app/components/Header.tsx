@@ -52,7 +52,6 @@ export default function Header() {
                 </li>
                 <li><a href="/news">NEWS</a></li>
                 <li><a href="/blog">ブログ</a></li>
-                <li><a href="/voice">お客様の声</a></li>
                 <li><a href="/faq">よくある質問</a></li>
                 <li><a href="/company">会社概要</a></li>
               </ul>
@@ -80,7 +79,6 @@ export default function Header() {
           </li>
           <li><a href="/news">NEWS</a></li>
           <li><a href="/blog">ブログ</a></li>
-          <li><a href="/voice">お客様の声</a></li>
           <li><a href="/faq">よくある質問</a></li>
           <li><a href="/company">会社概要</a></li>
           <li><a href="/contact">お問い合わせ</a></li>

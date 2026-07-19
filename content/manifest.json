@@ -4925,7 +4925,7 @@
 "ogSiteName": "不用品回収なら大阪のアストラ",
 "ogImage": "https://pe-astra.com/wp-content/uploads/2021/08/logo-1.jpeg",
 "twitterCard": "summary",
-"noindex": false
+"noindex": true
 },
 "voice/wakayamaken/index.html": {
 "title": "和歌山県 | 不用品回収なら大阪のアストラ",

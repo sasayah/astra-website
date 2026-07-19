@@ -105,7 +105,10 @@ export async function POST(req: Request) {
       const rel = `${dir}/${fn}`;
       const body = readFileSync(path.join(abs, fn), "utf-8");
       await upsert("posts", `/${rel}`, {
-        title: man[rel]?.title?.split(" | ")[0] || fn.replace(".html", ""),
+        title:
+          man[rel]?.title
+            ?.replace(/\s*\|\s*不用品回収なら大阪のアストラ\s*$/, "")
+            .replace(/｜不用品回収アストラ$/, "") || fn.replace(".html", ""),
         slug: fn.replace(".html", ""),
         category: dir === "blog" ? "ブログ" : "未分類",
         publishedAt: extractDate(body),

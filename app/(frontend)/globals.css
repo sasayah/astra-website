@@ -297,3 +297,42 @@
   font-weight: 700;
   color: #6b7482;
 }
+
+/* ブログ(DB駆動)のページャと記事ナビ */
+.blog-pager,
+.blog-postnav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin: 34px auto 0;
+  max-width: 720px;
+}
+.blog-pager a,
+.blog-pager a:link,
+.blog-pager a:visited,
+.blog-postnav a,
+.blog-postnav a:link,
+.blog-postnav a:visited {
+  display: inline-block;
+  background: #fff;
+  border: 1px solid #e0e4ea;
+  border-radius: 999px;
+  padding: 8px 20px;
+  font-size: 14px;
+  font-weight: 700;
+  color: #1f2c47;
+  text-decoration: none;
+}
+.blog-pager a:hover,
+.blog-postnav a:hover {
+  border-color: #f39800;
+}
+.blog-pager__info {
+  font-size: 13px;
+  color: #777;
+}
+.blog-postnav__index {
+  background: #1f2c47 !important;
+  color: #fff !important;
+}

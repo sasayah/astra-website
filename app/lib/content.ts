@@ -61,7 +61,8 @@ export function getPage(slug: string[]): { body: string; meta: Meta } | null {
   return { body, meta: metaOf(rel) };
 }
 
-/** ルート直下の index.html(=トップ) を除く全ページの slug 配列 */
+/** ルート直下の index.html(=トップ) を除く全ページの slug 配列。
+ *  blog/ 配下はPayload DB駆動のルート（/blog, /blog/[slug]）に移行したため除外する */
 export function allSlugs(): string[][] {
   const out: string[][] = [];
   const walk = (dir: string, parts: string[]) => {
@@ -79,7 +80,7 @@ export function allSlugs(): string[][] {
     }
   };
   walk(PAGES, []);
-  return out;
+  return out.filter((parts) => parts[0] !== "blog");
 }
 
 /** 市区町村名から、その市のブログ作業事例を新しい順に返す（地域ページの個別化用）。
@@ -103,13 +104,14 @@ export function postsForCity(city: string, limit = 3): { posts: CityPost[]; tota
   return { posts: hits.slice(0, limit).map(({ path, label }) => ({ path, label })), total: hits.length };
 }
 
-/** manifestの全キー（sitemap用）。noindexページを除き、相対キー → URLパスに変換して返す */
+/** manifestの全キー（sitemap用）。noindexページを除き、相対キー → URLパスに変換して返す。
+ *  blog/ 配下はDB駆動に移行したため除外（sitemapはDBから別途取得） */
 export function allUrlPaths(): string[] {
   return Object.keys(manifest)
-    .filter((rel) => !manifest[rel]?.noindex)
+    .filter((rel) => !manifest[rel]?.noindex && !rel.startsWith("blog/"))
     .map((rel) => {
       if (rel === "index.html") return "/";
       if (rel.endsWith("/index.html")) return "/" + rel.slice(0, -"/index.html".length);
-      return "/" + rel; // 例 blog/3207.html
+      return "/" + rel; // 例 未分類/1403.html
     });
 }

@@ -15,7 +15,6 @@ export default function Footer() {
                 <li><a href="/ihinseiri">遺品整理</a></li>
                 <li><a href="/news">NEWS</a></li>
                 <li><a href="/blog">ブログ</a></li>
-                <li><a href="/voice">お客様の声</a></li>
               </ul>
             </li>
             <li>
