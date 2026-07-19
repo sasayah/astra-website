@@ -28,6 +28,7 @@ export function generateStaticParams(): { slug: string[] }[] {
     params.push({ slug: ["b", item.slug] });
     for (const city of LP_CITIES) {
       params.push({ slug: [item.slug, city.slug] });
+      params.push({ slug: ["b", item.slug, city.slug] });
     }
   }
   return params;
@@ -36,12 +37,15 @@ export function generateStaticParams(): { slug: string[] }[] {
 function resolve(
   slug: string[],
 ): { item: LpItem; city?: LpCity; variant: "a" | "b" } | null {
-  // B案: /lp/b/{item}
+  // B案: /lp/b/{item} と /lp/b/{item}/{city}
   if (slug[0] === "b") {
-    if (slug.length !== 2) return null;
     const item = findItem(slug[1]);
     if (!item) return null;
-    return { item, variant: "b" };
+    if (slug.length === 2) return { item, variant: "b" };
+    if (slug.length !== 3) return null;
+    const city = findCity(slug[2]);
+    if (!city) return null;
+    return { item, city, variant: "b" };
   }
   const item = findItem(slug[0]);
   if (!item) return null;
