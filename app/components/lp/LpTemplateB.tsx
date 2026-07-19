@@ -75,18 +75,21 @@ export default function LpTemplateB({ item, city }: { item: LpItem; city?: LpCit
             {item.kw.split("・")[0]}
           </h1>
           <div className="lpb-price-card">
-            <p className="lpb-price-card__label">{item.name}の単品回収</p>
+            <p className="lpb-price-card__label">{item.name}の回収 参考価格</p>
             <p className="lpb-price-card__price">
               {price ? price.price : "無料見積もり"}
-              <span className="lpb-price-card__tax">税込・搬出費込み</span>
+              <span className="lpb-price-card__tax">目安</span>
             </p>
             {price?.note ? <p className="lpb-price-card__note">{price.note}</p> : null}
+            <p className="lpb-price-card__note">
+              現地でお見積もり後に確定金額をご提示。確定後の追加料金は0円です。
+            </p>
             <ul className="lpb-price-card__zero">
               <li>
                 見積り<strong>0円</strong>
               </li>
               <li>
-                出張費<strong>0円</strong>
+                ご相談<strong>0円</strong>
               </li>
               <li>
                 追加料金<strong>0円</strong>
@@ -138,8 +141,18 @@ export default function LpTemplateB({ item, city }: { item: LpItem; city?: LpCit
             </table>
           </div>
           <p className="lp-works__note">
-            ※搬出費込みの税込目安です。設置状況・搬出経路により変動するため、作業前に確定金額をご提示します。
+            ※料金は目安です。想定以上に作業時間がかかる場合は料金が変わります。現地調査後のお見積もりで確定金額をご提示し、確定後の追加料金は0円です。
           </p>
+          <details className="lp-room-prices">
+            <summary>全品目の参考価格表を見る（家電・家具・寝具・事務用品ほか）</summary>
+            <div style={{ padding: "0 16px 16px" }}>
+              <img
+                src={`${UP}/2021/07/price2.png`}
+                alt="参考価格一覧: TV4,000円〜 冷蔵庫6,000円〜 洗濯機5,000円〜 エアコン1,500円〜 ソファ3,000円〜 タンス3,000円〜 ベッドマット3,000円〜 ほか。一覧にないものも回収OK"
+                loading="lazy"
+              />
+            </div>
+          </details>
           <h3 className="lp-subtitle">まとめて処分ならトラック積み放題がお得</h3>
           <div className="lp-trucks">
             <img

@@ -60,26 +60,29 @@ export const LP_CITIES: LpCity[] = [
 export const LP_ITEMS: LpItem[] = lpItemsJson as LpItem[];
 
 /**
- * 品目別 単品回収の料金目安（税込・搬出費込みの想定）。B案LP（/lp/b/...）のみで使用。
- * ※★仮の暫定値★ オーナー未確認。確認が取れるまで広告配信のリンク先にしないこと。
- *   確定後にこのコメントを更新する。軽トラ〜2tの積み放題価格のみ実掲載値（/huyouhin掲載）。
+ * 品目別 単品回収の参考価格（目安）。B案LP（/lp/b/...）のみで使用。
+ * 出典: 既存サイト掲載の参考価格表 /wp-content/uploads/2021/07/price2.png（/huyouhin で公開中）。
+ * 「料金は目安。想定以上に作業時間がかかる場合は変動、現地見積もりで確定金額を提示」が前提条件。
+ * 軽トラ〜2tの積み放題価格も実掲載値（s_truck/m_truck/l_truck.jpg）。
  */
 export type LpPriceRow = { slug: string; name: string; price: string; note?: string };
 export const SINGLE_ITEM_PRICES: LpPriceRow[] = [
-  { slug: "reizouko", name: "冷蔵庫", price: "8,000円〜", note: "2ドア目安・リサイクル料金込み" },
-  { slug: "sentakuki", name: "洗濯機", price: "6,000円〜", note: "縦型目安・リサイクル料金込み" },
-  { slug: "tv", name: "テレビ", price: "5,000円〜", note: "液晶・ブラウン管どちらもOK" },
-  { slug: "aircon", name: "エアコン", price: "5,000円〜", note: "取り外し作業込み" },
-  { slug: "mattress", name: "マットレス", price: "6,000円〜", note: "スプリング可" },
-  { slug: "bed", name: "ベッド", price: "9,000円〜", note: "解体作業込み" },
-  { slug: "tansu", name: "タンス", price: "7,000円〜", note: "婚礼タンス可" },
-  { slug: "sofa", name: "ソファ", price: "7,000円〜", note: "2人掛け目安" },
-  { slug: "desk", name: "机・デスク", price: "6,000円〜" },
-  { slug: "piano", name: "電子ピアノ", price: "10,000円〜", note: "アップライトは要見積り" },
-  { slug: "jitensha", name: "自転車", price: "3,000円〜" },
-  { slug: "futon", name: "布団", price: "2,000円〜", note: "1枚あたり" },
-  { slug: "monitor", name: "モニター", price: "3,000円〜" },
-  { slug: "sodaigomi", name: "粗大ごみ1点", price: "3,000円〜", note: "品目により変動" },
+  { slug: "reizouko", name: "冷蔵庫", price: "6,000円〜" },
+  { slug: "sentakuki", name: "洗濯機", price: "5,000円〜" },
+  { slug: "tv", name: "テレビ", price: "4,000円〜", note: "液晶・ブラウン管どちらもOK" },
+  { slug: "aircon", name: "エアコン", price: "1,500円〜" },
+  { slug: "mattress", name: "マットレス", price: "3,000円〜", note: "シングル。ダブルは5,000円〜" },
+  { slug: "bed", name: "ベッドフレーム", price: "3,000円〜", note: "引き出し付きは4,000円〜" },
+  { slug: "tansu", name: "タンス", price: "3,000円〜" },
+  { slug: "sofa", name: "ソファ", price: "3,000円〜", note: "1人掛け。2人掛け4,000円〜/3人掛け6,000円〜" },
+  { slug: "desk", name: "机・デスク", price: "2,500円〜" },
+  { slug: "piano", name: "電子ピアノ", price: "8,000円〜", note: "足つき。エレクトーンは12,000円〜" },
+  { slug: "jitensha", name: "自転車", price: "1,500円〜" },
+  { slug: "futon", name: "布団", price: "1,000円〜", note: "シングル/セミダブル。ダブルは1,500円〜" },
+  { slug: "monitor", name: "モニター", price: "2,000円〜" },
+  { slug: "sodaigomi", name: "粗大ごみ1点", price: "500円〜", note: "品目により変動（小家電500円〜など）" },
+  { slug: "kagu", name: "家具まとめて（軽トラ積み放題）", price: "12,000円〜", note: "1点からでもOK" },
+  { slug: "kaden", name: "家電まとめて（軽トラ積み放題）", price: "12,000円〜", note: "1点からでもOK" },
 ];
 
 export function priceOf(slug: string): LpPriceRow | undefined {
