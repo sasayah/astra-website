@@ -577,6 +577,23 @@ a.ah-form {
 .area-seo__comment p {
   margin: 0;
 }
+/* 旧ページ埋め込みCSSの ul::before/::after{content:""} クリアフィックスが
+ * grid/flexコンテナでは「空のグリッドアイテム」となり1マス目を占有するため、
+ * こちらのレイアウト用リストでは生成しない */
+.area-seo__voices::before,
+.area-seo__voices::after,
+.area-seo__neighbors::before,
+.area-seo__neighbors::after,
+.area-seo__works::before,
+.area-seo__works::after,
+.ah-cities::before,
+.ah-cities::after,
+.ah-jump::before,
+.ah-jump::after,
+.ah-chips::before,
+.ah-chips::after {
+  content: none;
+}
 .area-seo__trucks {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
