@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { sendLineNotification } from "@/app/lib/line";
 
 const RESEND_API = "https://api.resend.com/emails";
 
@@ -8,6 +9,7 @@ const FIELD_LABELS: Record<string, string> = {
   "parm[input_main_tp]": "電話番号",
   "parm[radio]": "ご希望",
   "parm[address]": "住所",
+  "parm[area]": "ご相談内容",
   name: "お名前",
   last_name: "姓",
   first_name: "名",
@@ -41,6 +43,13 @@ function formatBody(fields: Record<string, string>): string {
     .filter(([k, v]) => !IGNORE_KEYS.has(k) && v?.trim())
     .map(([k, v]) => `${FIELD_LABELS[k] ?? k}: ${v}`)
     .join("\n");
+}
+
+/** どのフォームからの送信かを見出しにする（LINE/メールの件名用）。
+ *  問い合わせフォーム(/contact)は parm[...] 名、見積もりシミュレーションは phone_number 等。 */
+function formLabel(fields: Record<string, string>): string {
+  const isContact = Object.keys(fields).some((k) => k.startsWith("parm["));
+  return isContact ? "お問い合わせフォーム" : "お見積もりシミュレーション";
 }
 
 async function sendEmail(to: string, subject: string, text: string, replyTo?: string) {
@@ -88,15 +97,22 @@ export async function POST(req: Request) {
   }
 
   const adminTo = process.env.MAIL_TO || "info@pe-astra.com";
+  const label = formLabel(fields);
   const body = formatBody(fields);
   const submitterEmail = fields["email_address"] || fields["parm[email]"] || "";
 
-  const okAdmin = await sendEmail(
-    adminTo,
-    "ホームページからお問い合わせがありました",
-    body,
-    submitterEmail || undefined,
-  );
+  // 担当者への通知は LINE とメールの両方に送る（どちらか届けばフォームは成功扱い）。
+  // LINE = 主通知（即時）、メール = 記録・控え。並行送信で待ち時間を最小化。
+  const lineText = `🔔 ${label}からお問い合わせがありました\n\n${body}`;
+  const [okLine, okAdminMail] = await Promise.all([
+    sendLineNotification(lineText),
+    sendEmail(
+      adminTo,
+      `【${label}】ホームページからお問い合わせがありました`,
+      body,
+      submitterEmail || undefined,
+    ),
+  ]);
 
   // 送信者への自動返信（メールアドレスがある場合のみ）
   if (submitterEmail) {
@@ -104,5 +120,6 @@ export async function POST(req: Request) {
     await sendEmail(submitterEmail, "お問い合わせいただきありがとうございます", auto);
   }
 
-  return NextResponse.json({ ok: okAdmin });
+  // LINE か メール のどちらかが成功すれば、リード取得できているため成功を返す。
+  return NextResponse.json({ ok: okLine || okAdminMail });
 }
