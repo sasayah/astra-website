@@ -4,17 +4,16 @@
  * テーマの見た目を壊すため撤去した。
  */
 
-/* ==== スマホ用ヘッダー再構成 ====
- * 旧テーマのSPヘッダーはPC用要素（クレカ表記・許可番号バッジ・縮小ロゴ）を
- * 詰め込んで判読不能だった。SPでは「ロゴ／電話／無料見積り／メニュー」だけに絞る。
+/* ==== スマホ用ヘッダー（kataduke-bugyo.jp を参考にした1段バー構成） ====
+ * スクロール前: ロゴ＋「お電話/24時間対応」「無料相談/お見積り0円」のコンパクトな1段バー。
+ * スクロール後: バーは流れて消え、右上の半透明MENUボタン＋下部固定CTAバー(btmFix)が残る。
  * PC(768px〜)は旧テーマのまま。詳細度・!importantは後読みの旧style.css対策 */
-.spCtaRow {
+.spBarBtns {
   display: none;
 }
 @media screen and (max-width: 767px) {
   /* 旧テーマはSPヘッダー(旧45px)をfixed+containerのpadding-top:45pxで相殺していた。
-   * 新ヘッダーは高さが増えたため、fixedをやめ通常フローに（スクロール中のCVは
-   * 下部固定バーとハンバーガーが担う）。paddingの相殺も不要になるため0に */
+   * 新ヘッダーは通常フロー（スクロールで消える）のため相殺も不要 */
   body #gHeader {
     padding: 0;
     position: static;
@@ -25,16 +24,20 @@
   body #gHeader .hBox {
     display: flex;
     align-items: center;
-    min-height: 48px;
-    padding: 4px 56px 4px 10px; /* 右は固定ハンバーガー(45px)ぶん空ける */
+    gap: 6px;
+    min-height: 60px;
+    padding: 6px 62px 6px 8px; /* 右は固定MENUボタン(48px)ぶん空ける */
     box-sizing: border-box;
   }
   body #gHeader .header-badge-container {
     width: auto;
+    flex: 1 1 auto;
+    min-width: 70px;
   }
   body #gHeader .header-badge-container img {
     margin-top: 0;
-    width: 170px;
+    width: 100%;
+    max-width: 120px;
     display: block;
   }
   /* 許可番号バッジとPC用右ブロック（クレカ・PC電話・PC問い合わせ）はSPでは出さない */
@@ -42,42 +45,119 @@
   body #gHeader .rBox {
     display: none !important;
   }
-  .spCtaRow {
+  /* 1段バー内の電話/相談ボタン */
+  .spBarBtns {
     display: flex;
     gap: 6px;
-    padding: 0 8px 8px;
+    flex: 0 0 auto;
   }
-  .spCtaRow a {
-    flex: 1 1 50%;
+  .spBarBtns a {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    min-height: 52px;
+    width: 88px;
+    min-height: 46px;
     border-radius: 8px;
     text-decoration: none;
-    line-height: 1.25;
-    padding: 6px 2px;
+    line-height: 1.2;
+    padding: 4px 2px;
   }
-  .spCtaRow .num {
-    font-size: 1.7rem;
+  .spBarBtns .l1 {
+    font-size: 1.5rem;
     font-weight: 700;
     color: #fff;
     white-space: nowrap;
   }
-  .spCtaRow .note {
+  .spBarBtns .l2 {
     font-size: 1rem;
     color: #fff;
     opacity: 0.95;
     white-space: nowrap;
   }
-  a.spCtaTel {
+  a.spBtnTel {
     background: #1ea54c;
     box-shadow: 0 2px 0 #157a38;
   }
-  a.spCtaMail {
+  a.spBtnMail {
     background: linear-gradient(180deg, #ff9a2e, #f07800);
     box-shadow: 0 2px 0 #c25f00;
+  }
+  /* 右上の固定MENUボタン（参考サイトの半透明丸型。スクロール後も残る） */
+  body #gHeader .menu {
+    position: fixed;
+    top: 8px;
+    right: 8px;
+    z-index: 5;
+  }
+  body #gHeader .menu a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    border-radius: 10px;
+    background: rgba(20, 20, 20, 0.55);
+  }
+  body #gHeader .menu a img {
+    display: none;
+  }
+  body #gHeader .menu a::before {
+    content: "";
+    width: 20px;
+    height: 14px;
+    background: linear-gradient(
+      #fff 0 2px,
+      transparent 2px 6px,
+      #fff 6px 8px,
+      transparent 8px 12px,
+      #fff 12px 14px
+    );
+  }
+  body #gHeader .menu a::after {
+    content: "MENU";
+    margin-top: 4px;
+    color: #fff;
+    font-size: 0.9rem;
+    line-height: 1;
+    letter-spacing: 0.05em;
+  }
+  /* メニュー表示中は下部固定CTAバーを隠す（メニュー自体に電話ボタンがある） */
+  body.fixed .btmFix {
+    display: none !important;
+  }
+  /* メニュー内・右上の閉じるボタン（開くボタンと同位置） */
+  body #gHeader .menuBox .closeTop {
+    margin: 0;
+    padding: 0;
+    position: fixed;
+    top: 8px;
+    right: 8px;
+    z-index: 11;
+  }
+  body #gHeader .menuBox .closeTop a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    border-radius: 10px;
+    background: rgba(20, 20, 20, 0.35);
+  }
+  body #gHeader .menuBox .closeTop a::before {
+    content: "✕";
+    color: #fff;
+    font-size: 1.8rem;
+    line-height: 1;
+  }
+  body #gHeader .menuBox .closeTop a::after {
+    content: "閉じる";
+    margin-top: 3px;
+    color: #fff;
+    font-size: 0.9rem;
+    line-height: 1;
   }
 }
 

@@ -59,20 +59,22 @@ export default function Header() {
             </nav>
           </div>
         </div>
-        <div className="menu sp"><a href="#"><img src={`${TPL}/img/common/menu.png`} width={45} alt="MENU" /></a></div>
-      </div>
-      {/* スマホ専用CTA行（PCでは非表示）。電話＝主導線、フォーム＝副導線 */}
-      <div className="spCtaRow sp">
-        <a href="tel:0120709333" className="spCtaTel">
-          <span className="num">0120-709-333</span>
-          <span className="note">通話無料・24時間・年中無休</span>
-        </a>
-        <a href="/contact" className="spCtaMail">
-          <span className="num">無料お見積り</span>
-          <span className="note">メールで相談・写真見積もりOK</span>
-        </a>
+        {/* スマホ専用CTA（PC非表示）。ヘッダー1段バー内の電話/相談ボタン */}
+        <div className="spBarBtns sp">
+          <a href="tel:0120709333" className="spBtnTel">
+            <span className="l1">お電話</span>
+            <span className="l2">24時間対応</span>
+          </a>
+          <a href="/contact" className="spBtnMail">
+            <span className="l1">無料相談</span>
+            <span className="l2">お見積り0円</span>
+          </a>
+        </div>
+        <div className="menu sp"><a href="#" aria-label="メニューを開く"><img src={`${TPL}/img/common/menu.png`} width={45} alt="MENU" /></a></div>
       </div>
       <div className="menuBox">
+        {/* 右上の閉じるボタン（開くボタンと同位置）。common.js の #gHeader .close a に自動バインドされる */}
+        <div className="close closeTop"><a href="#" aria-label="メニューを閉じる"></a></div>
         <ul className="navi">
           <li>
             <a href="/service">サービス紹介</a>
