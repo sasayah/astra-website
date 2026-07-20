@@ -379,7 +379,8 @@ export default function LpTemplateB({ item, city }: { item: LpItem; city?: LpCit
                 placeholder={`例）${item.name}の回収希望。エレベーターなし3階です。`}
               />
             </p>
-            <button type="submit" className="lp-form__submit">
+            {/* id=submit_button はGTMのCVトリガー（Click ID）が参照している */}
+            <button type="submit" id="submit_button" className="lp-form__submit">
               無料見積もりを依頼する（0円）
             </button>
             <p className="lp-form__privacy">
