@@ -18,7 +18,8 @@ const dirname = path.dirname(fileURLToPath(import.meta.url));
 // DATABASE_URI が postgres:// なら本番Postgres、それ以外はローカルSQLite。
 // 本番(Postgres)は起動時に prodMigrations が未適用分を自動適用する。
 // migrations/ はPostgres方言で生成済み（ローカルsqlite開発はdevの自動pushで不要）。
-const dbUri = process.env.DATABASE_URI || "file:./payload.db";
+// 環境変数コピペ時の前後空白・改行混入に耐える（実際に末尾スペースで接続失敗した実績あり）
+const dbUri = (process.env.DATABASE_URI || "file:./payload.db").trim();
 const migrationDir = path.resolve(dirname, "migrations");
 const db = dbUri.startsWith("postgres")
   ? postgresAdapter({
