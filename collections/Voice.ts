@@ -1,13 +1,15 @@
 import type { CollectionConfig } from "payload";
 import { isAdmin, isEditorOrAdmin } from "./access";
 
-/** お客様の声。県/市町村ごとの記事。 */
+/** お客様の声。旧サイトからの移行データ（現在フロントエンドでは未使用）。
+ *  運用者が触る必要がないため管理画面のメニューから非表示にしている。 */
 export const Voice: CollectionConfig = {
   slug: "voice",
   labels: { singular: "お客様の声", plural: "お客様の声" },
   admin: {
     useAsTitle: "title",
     defaultColumns: ["title", "prefecture", "city", "legacyUrl"],
+    hidden: true,
   },
   access: {
     read: () => true,
