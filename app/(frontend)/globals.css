@@ -336,3 +336,16 @@
   background: #1f2c47 !important;
   color: #fff !important;
 }
+
+/* 旧テーマはSP追従バー(btmFix)の高さぶん #container に下余白149pxを常に確保するが、
+ * PCではbtmFixがdisplay:noneのため余白だけが残りフッター下に空白ができる → PCでは0に。
+ * (body #container で旧テーマより詳細度を上げる) */
+@media screen and (min-width: 768px) {
+  body #container {
+    padding-bottom: 0;
+  }
+}
+/* LPはbtmFixを持たず .lp 自身が追従CTA分の余白(88px)を持つため、二重の余白を解消 */
+body #container:has(.lp) {
+  padding-bottom: 0;
+}
