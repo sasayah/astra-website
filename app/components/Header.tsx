@@ -46,21 +46,17 @@ export default function Header() {
                   <ul className="subNavi">
                     <li><a href="/huyouhin">不用品回収</a></li>
                     <li><a href="/ihinseiri">遺品整理</a></li>
+                    <li><a href="/hoarding">ゴミ屋敷清掃</a></li>
                     <li><a href="/service/#a01">特殊清掃</a></li>
                     <li><a href="/service/#a02">解体・リフォーム</a></li>
                   </ul>
                 </li>
-                <li><a href="/news">NEWS</a></li>
+                <li><a href="/kansai-huyouhin">対応エリア</a></li>
                 <li><a href="/blog">ブログ</a></li>
                 <li><a href="/faq">よくある質問</a></li>
                 <li><a href="/company">会社概要</a></li>
               </ul>
             </nav>
-            <ul className="snsList clearfix">
-              <li><a href="https://www.instagram.com/pe.astra/" target="_blank" rel="noopener"><img src={`${TPL}/img/common/sns01.png`} alt="INS" /></a></li>
-              <li><a href="https://www.facebook.com/%E9%81%BA%E5%93%81%E6%95%B4%E7%90%86%E3%82%A2%E3%82%B9%E3%83%88%E3%83%A9-236892510531494/" target="_blank" rel="noopener"><img src={`${TPL}/img/common/sns02.png`} alt="f" /></a></li>
-              <li><a href="https://line.me/R/ti/p/@raa8611w" target="_blank" rel="noopener"><img src={`${TPL}/img/common/sns03.png`} alt="@" /></a></li>
-            </ul>
           </div>
         </div>
         <div className="menu sp"><a href="#"><img src={`${TPL}/img/common/menu.png`} width={45} alt="MENU" /></a></div>
@@ -73,20 +69,16 @@ export default function Header() {
             <ul className="subNavi">
               <li><a href="/huyouhin">不用品回収</a></li>
               <li><a href="/ihinseiri">遺品整理</a></li>
+              <li><a href="/hoarding">ゴミ屋敷清掃</a></li>
               <li><a href="/service/#a01">特殊清掃</a></li>
               <li><a href="/service/#a02">解体・リフォーム</a></li>
             </ul>
           </li>
-          <li><a href="/news">NEWS</a></li>
+          <li><a href="/kansai-huyouhin">対応エリア</a></li>
           <li><a href="/blog">ブログ</a></li>
           <li><a href="/faq">よくある質問</a></li>
           <li><a href="/company">会社概要</a></li>
-          <li><a href="/contact">お問い合わせ</a></li>
-        </ul>
-        <ul className="sns">
-          <li><a href="https://line.me/R/ti/p/@raa8611w" target="_blank" rel="noopener"><img src={`${TPL}/img/common/sns03.png`} alt="@" /></a></li>
-          <li><a href="https://www.facebook.com/%E9%81%BA%E5%93%81%E6%95%B4%E7%90%86%E3%82%A2%E3%82%B9%E3%83%88%E3%83%A9-236892510531494/" target="_blank" rel="noopener"><img src={`${TPL}/img/common/sns02.png`} alt="f" /></a></li>
-          <li><a href="https://www.instagram.com/pe.astra/" target="_blank" rel="noopener"><img src={`${TPL}/img/common/sns01.png`} alt="INS" /></a></li>
+          <li><a href="/contact">お問い合わせ/お見積り</a></li>
         </ul>
         <div className="tel">
           <a href="tel:0120709333">

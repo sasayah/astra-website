@@ -11,7 +11,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const staticUrls: MetadataRoute.Sitemap = allUrlPaths().map((p) => {
     const isTop = p === "/";
     const isSection =
-      /^\/(service|huyouhin|ihinseiri|company|contact|faq|voice|news|kansai-huyouhin)$/.test(p);
+      /^\/(service|huyouhin|ihinseiri|hoarding|company|contact|faq|voice|kansai-huyouhin)$/.test(p);
     return {
       // 日本語パス(未分類/等)はRFC3986準拠のためpercent-encodeして出力
       url: SITE_URL + encodeURI(p),

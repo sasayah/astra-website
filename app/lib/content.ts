@@ -105,10 +105,13 @@ export function postsForCity(city: string, limit = 3): { posts: CityPost[]; tota
 }
 
 /** manifestの全キー（sitemap用）。noindexページを除き、相対キー → URLパスに変換して返す。
- *  blog/ 配下はDB駆動に移行したため除外（sitemapはDBから別途取得） */
+ *  blog/ 配下はDB駆動に移行したため除外（sitemapはDBから別途取得）。
+ *  news/ は更新停止のためトップへ301（next.config.ts）済み → sitemapからも除外 */
 export function allUrlPaths(): string[] {
   return Object.keys(manifest)
-    .filter((rel) => !manifest[rel]?.noindex && !rel.startsWith("blog/"))
+    .filter(
+      (rel) => !manifest[rel]?.noindex && !rel.startsWith("blog/") && !rel.startsWith("news/"),
+    )
     .map((rel) => {
       if (rel === "index.html") return "/";
       if (rel.endsWith("/index.html")) return "/" + rel.slice(0, -"/index.html".length);

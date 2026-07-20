@@ -18,6 +18,9 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
       { source: "/contact/confirm", destination: "/contact", permanent: true },
+      // NEWS（2021年の開設告知1件のみで更新停止）はナビから外し、トップへ集約
+      { source: "/news", destination: "/", permanent: true },
+      { source: "/news/:path*", destination: "/", permanent: true },
       // WPのアーカイブ・ページネーション・フィード類
       { source: "/category/:path*", destination: "/blog", permanent: true },
       { source: "/tag/:path*", destination: "/blog", permanent: true },

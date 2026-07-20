@@ -77,11 +77,16 @@ export const Posts: CollectionConfig = {
       name: "status",
       type: "select",
       label: "公開状態",
-      defaultValue: "published",
+      // 誤って保存してもサイトに載らないよう、新規記事は下書きで始める
+      defaultValue: "draft",
       options: [
-        { label: "公開", value: "published" },
         { label: "下書き", value: "draft" },
+        { label: "公開", value: "published" },
       ],
+      admin: {
+        description:
+          "「下書き」のままなら、保存してもサイトには表示されません。記事が完成したら「公開」に変えて保存してください。",
+      },
     },
     // ---- 以下は内部用（運用者には見せない） ----
     {
