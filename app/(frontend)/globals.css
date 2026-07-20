@@ -577,6 +577,26 @@ a.ah-form {
 .area-seo__comment p {
   margin: 0;
 }
+.area-seo__trucks {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  margin-bottom: 8px;
+}
+.area-seo__trucks img {
+  width: 100%;
+  height: auto;
+  border: 1px solid #e6e6e6;
+  border-radius: 10px;
+  background: #fff;
+}
+@media all and (max-width: 767px) {
+  .area-seo__trucks {
+    grid-template-columns: 1fr;
+    max-width: 420px;
+    margin: 0 auto 8px;
+  }
+}
 .area-seo__works {
   list-style: none;
   padding: 0;

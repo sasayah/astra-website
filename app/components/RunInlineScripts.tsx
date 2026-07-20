@@ -12,10 +12,11 @@ import { useEffect } from "react";
  */
 export default function RunInlineScripts() {
   useEffect(() => {
-    const container = document.getElementById("static-content");
-    if (!container) return;
+    // 地域ページは分割挿入により複数コンテナになるため、全コンテナのscriptを文書順に実行
+    const containers = Array.from(document.querySelectorAll("[data-static-content]"));
+    if (!containers.length) return;
     let cancelled = false;
-    const scripts = Array.from(container.querySelectorAll("script"));
+    const scripts = containers.flatMap((c) => Array.from(c.querySelectorAll("script")));
 
     const run = async () => {
       for (const old of scripts) {

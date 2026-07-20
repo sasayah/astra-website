@@ -32,16 +32,33 @@ export default async function Page({
   const { slug } = await params;
   const page = getPage(slug);
   if (!page) notFound();
-  // 地域ページ（kansai-huyouhin/{市区町村}）にはSEO強化セクションを追記する
+  // 地域ページ（kansai-huyouhin/{市区町村}）はCV/SEO強化セクションを差し込む。
+  // 静的HTML内の AREA_TOP_INSERT マーカーで分割し、h1直下に「引き」の強い内容
+  // （価格・事例・クチコミ）、末尾にFAQ・近隣リンクを配置する
   const areaCity =
     slug[0] === "kansai-huyouhin" && slug.length === 2
       ? page.meta.title.match(/^(.+?)の不用品回収/)?.[1]
       : undefined;
+  const MARKER = "<!-- AREA_TOP_INSERT -->";
+  const [bodyTop, bodyRest] =
+    areaCity && page.body.includes(MARKER)
+      ? (page.body.split(MARKER, 2) as [string, string])
+      : [page.body, null];
   return (
     <>
-      <StaticHtml html={page.body} />
+      <StaticHtml html={bodyTop} />
       {areaCity ? (
         <AreaSeoSections
+          part="top"
+          city={areaCity}
+          slug={slug[1]}
+          pathname={`/kansai-huyouhin/${slug[1]}`}
+        />
+      ) : null}
+      {bodyRest != null ? <StaticHtml html={bodyRest} /> : null}
+      {areaCity ? (
+        <AreaSeoSections
+          part="bottom"
           city={areaCity}
           slug={slug[1]}
           pathname={`/kansai-huyouhin/${slug[1]}`}
