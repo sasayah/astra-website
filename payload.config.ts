@@ -66,7 +66,8 @@ export default buildConfig({
     supportedLanguages: { ja, en },
     fallbackLanguage: "ja",
   },
-  collections: [Users, Posts, Voice, Media],
+  // 並び順が管理画面のメニュー順になる（ブログ記事を先頭に）
+  collections: [Posts, Media, Users, Voice],
   plugins,
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || "dev-secret-change-me",
