@@ -1,5 +1,5 @@
 import type { LpCity, LpItem } from "@/app/lib/lp-data";
-import { withCity } from "@/app/lib/lp-data";
+import { lpCopy } from "@/app/lib/lp-data";
 import LpDisposalOptions from "@/app/components/lp/LpDisposalOptions";
 import { voicesForItem } from "@/app/lib/voices";
 import GoogleRatingBadge from "@/app/components/GoogleRatingBadge";
@@ -84,12 +84,15 @@ function LineButton() {
 }
 
 export default function LpTemplate({ item, city }: { item: LpItem; city?: LpCity }) {
-  const area = city ? city.name : "大阪";
+  const area = city ? city.name : (item.area ?? "大阪");
+  // 広域LP（関西全域配信の広告の受け皿）では拠点前提の「最短20分」を使わない
+  const wide = !city && item.area != null;
+  const speed = wide ? "最短当日" : "最短20分";
   const lpLabel = `${item.name}${item.kw} ${area}`;
-  // 品目コピーの全フィールドで {city} トークンを地域名に置換する
-  const t = (s: string) => withCity(s, city);
+  // 品目コピーの全フィールドで {city} 置換＋広域LPの速度表現差し替えを行う
+  const t = (s: string) => lpCopy(s, item, city);
   const merits: [string, string][] = [
-    ["最短20分", "即日回収OK"],
+    wide ? ["最短当日", "回収OK"] : ["最短20分", "即日回収OK"],
     ["追加料金", "0円"],
     ["見積り・相談", "0円"],
     [`${area}全域`, "対応"],
@@ -278,7 +281,7 @@ export default function LpTemplate({ item, city }: { item: LpItem; city?: LpCity
           <h3 className="lp-subtitle">{item.name}の処分方法くらべ</h3>
           <LpDisposalOptions item={item} />
           <div className="lp-sec__cta">
-            <p className="lp-cta-lead">今お電話いただければ、最短20分でお伺いできます</p>
+            <p className="lp-cta-lead">今お電話いただければ、{speed}でお伺いできます</p>
             <TelButton />
             <p className="lp-cta-sub">＼電話が苦手な方は／</p>
             <LineButton />
@@ -362,7 +365,7 @@ export default function LpTemplate({ item, city }: { item: LpItem; city?: LpCity
             <li>
               <span className="lp-flow__step">STEP 3</span>
               <strong>回収作業</strong>
-              <p>最短20分でお伺い。搬出はすべてスタッフにお任せください。</p>
+              <p>{speed}でお伺い。搬出はすべてスタッフにお任せください。</p>
             </li>
           </ol>
         </div>

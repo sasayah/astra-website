@@ -17,6 +17,10 @@ export type LpItem = {
   name: string;
   /** 検索動詞句（例: 処分・回収） */
   kw: string;
+  /** ベースLP（市区なし）の地域表記。省略時は「大阪」。
+   *  関西全域配信の広告（大型一般→/lp/kagu等）を受けるLPは「関西」を指定する。
+   *  「関西」等の広域指定時はテンプレート側が「最短20分」を「最短当日」に置き換える */
+  area?: string;
   /** {city} トークンを含む title */
   title: string;
   /** {city} トークンを含む H1 */
@@ -108,7 +112,22 @@ export function findCity(slug: string): LpCity | undefined {
   return LP_CITIES.find((c) => c.slug === slug);
 }
 
-/** {city} トークンを地域名に置換（ベースLPは「大阪」） */
-export function withCity(text: string, city?: LpCity): string {
-  return text.replaceAll("{city}", city ? city.name : "大阪");
+/** {city} トークンを地域名に置換（ベースLPは fallback、省略時「大阪」） */
+export function withCity(text: string, city?: LpCity, fallback = "大阪"): string {
+  return text.replaceAll("{city}", city ? city.name : fallback);
+}
+
+/** LPコピー整形の正規ルート。{city}置換に加え、広域LP（item.area指定・市区なし）では
+ *  拠点前提の「最短20分」を「最短当日」へ置き換える。テンプレートとmetadataの両方で使う */
+export function lpCopy(text: string, item: LpItem, city?: LpCity): string {
+  let out = withCity(text, city, item.area ?? "大阪");
+  if (!city && item.area) {
+    out = out
+      .replaceAll("最短20分〜", "最短当日")
+      .replaceAll("最短20分", "最短当日")
+      // 置換で生じる「最短当日"即日"…」の冗長連結を清掃
+      .replaceAll("最短当日即日", "最短当日")
+      .replaceAll("最短当日の即日回収", "最短当日の回収");
+  }
+  return out;
 }

@@ -1,5 +1,5 @@
 import type { LpCity, LpItem } from "@/app/lib/lp-data";
-import { SINGLE_ITEM_PRICES, priceOf, withCity } from "@/app/lib/lp-data";
+import { SINGLE_ITEM_PRICES, lpCopy, priceOf } from "@/app/lib/lp-data";
 import LpDisposalOptions from "@/app/components/lp/LpDisposalOptions";
 import { voicesForItem } from "@/app/lib/voices";
 import GoogleRatingBadge from "@/app/components/GoogleRatingBadge";
@@ -60,9 +60,11 @@ function TelBlock() {
 }
 
 export default function LpTemplateB({ item, city }: { item: LpItem; city?: LpCity }) {
-  const area = city ? city.name : "大阪";
+  const area = city ? city.name : (item.area ?? "大阪");
+  // 広域LP（関西全域配信の広告の受け皿）では拠点前提の「最短20分」を使わない
+  const wide = !city && item.area != null;
   const lpLabel = `B:${item.name} ${area}`;
-  const t = (s: string) => withCity(s, city);
+  const t = (s: string) => lpCopy(s, item, city);
   const price = priceOf(item.slug);
   return (
     <main className="lp lp--b">
@@ -71,7 +73,8 @@ export default function LpTemplateB({ item, city }: { item: LpItem; city?: LpCit
         <div className="lp-inner">
           <p className="lpb-hero__area">
             {area}
-            {city ? "" : "・関西一円"}対応｜西淀川区役所サイネージ掲載・総合実績10,000件
+            {city ? "" : area === "関西" ? "一円" : "・関西一円"}
+            対応｜西淀川区役所サイネージ掲載・総合実績10,000件
           </p>
           <h1 className="lpb-hero__title">
             {area}の{item.name}

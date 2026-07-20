@@ -7,8 +7,8 @@ import {
   LP_ITEMS,
   findCity,
   findItem,
+  lpCopy,
   priceOf,
-  withCity,
   type LpCity,
   type LpItem,
 } from "@/app/lib/lp-data";
@@ -68,9 +68,9 @@ export async function generateMetadata({
   const price = variant === "b" ? priceOf(item.slug) : undefined;
   const title =
     variant === "b" && price
-      ? `${withCity("{city}", city)}の${item.name}回収 ${price.price}｜追加料金0円・即日対応【アストラ】`
-      : withCity(item.title, city);
-  const description = withCity(item.lead, city).slice(0, 120);
+      ? `${lpCopy("{city}", item, city)}の${item.name}回収 ${price.price}｜追加料金0円・即日対応【アストラ】`
+      : lpCopy(item.title, item, city);
+  const description = lpCopy(item.lead, item, city).slice(0, 120);
   return {
     title,
     description,
