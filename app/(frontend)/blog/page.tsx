@@ -10,7 +10,7 @@ const NOIMG = "/wp-content/themes/ASTRA/img/news/noimage.jpg";
 export const metadata: Metadata = {
   title: "ブログ | 不用品回収なら大阪のアストラ",
   description:
-    "不用品回収アストラの作業ブログ。大阪を中心に関西一円で行った不用品回収・遺品整理の事例を紹介しています。",
+    "不用品回収アストラの作業ブログ。大阪を中心に関西全域で行った不用品回収・遺品整理の事例を紹介しています。",
   alternates: { canonical: "https://pe-astra.com/blog" },
 };
 

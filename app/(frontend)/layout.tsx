@@ -45,9 +45,9 @@ const LOCAL_BUSINESS_JSONLD = {
 export const metadata: Metadata = {
   metadataBase: new URL("https://pe-astra.com"),
   title:
-    "リサイクル・不用品回収 アストラ ｜近畿一円の不用品回収、遺品整理、処分、生前整理",
+    "リサイクル・不用品回収 アストラ ｜近畿全域の不用品回収、遺品整理、処分、生前整理",
   description:
-    "近畿一円の不用品回収、遺品整理、生前整理はアストラにお任せください。",
+    "近畿全域の不用品回収、遺品整理、生前整理はアストラにお任せください。",
 };
 
 export default function RootLayout({

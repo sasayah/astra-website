@@ -73,7 +73,7 @@ export default function LpTemplateB({ item, city }: { item: LpItem; city?: LpCit
         <div className="lp-inner">
           <p className="lpb-hero__area">
             {area}
-            {city ? "" : area === "関西" ? "一円" : "・関西一円"}
+            {city ? "" : area === "関西" ? "全域" : "を中心に関西全域"}
             対応｜西淀川区役所サイネージ掲載・総合実績10,000件
           </p>
           <h1 className="lpb-hero__title">
