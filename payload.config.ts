@@ -32,26 +32,27 @@ const db = dbUri.startsWith("postgres")
 // 管理画面からのアップロード画像の保存先。
 // S3_* が設定されていれば Railway Bucket（S3互換）へ保存（再デプロイで消えない）。
 // 未設定時はローカルFS（public/uploads-cms、開発用）。
+// プラグインは常に登録し enabled で切替える（importMapへのクライアント
+// コンポーネント登録を環境変数の有無に依存させないため）
 const s3Enabled = Boolean(
   process.env.S3_BUCKET && process.env.S3_ACCESS_KEY_ID && process.env.S3_SECRET_ACCESS_KEY,
 );
-const plugins = s3Enabled
-  ? [
-      s3Storage({
-        collections: { media: true },
-        bucket: process.env.S3_BUCKET!,
-        config: {
-          endpoint: process.env.S3_ENDPOINT,
-          region: process.env.S3_REGION || "auto",
-          credentials: {
-            accessKeyId: process.env.S3_ACCESS_KEY_ID!,
-            secretAccessKey: process.env.S3_SECRET_ACCESS_KEY!,
-          },
-          forcePathStyle: true,
-        },
-      }),
-    ]
-  : [];
+const plugins = [
+  s3Storage({
+    enabled: s3Enabled,
+    collections: { media: true },
+    bucket: process.env.S3_BUCKET || "unused",
+    config: {
+      endpoint: process.env.S3_ENDPOINT,
+      region: process.env.S3_REGION || "auto",
+      credentials: {
+        accessKeyId: process.env.S3_ACCESS_KEY_ID || "unused",
+        secretAccessKey: process.env.S3_SECRET_ACCESS_KEY || "unused",
+      },
+      forcePathStyle: true,
+    },
+  }),
+];
 
 export default buildConfig({
   admin: {
