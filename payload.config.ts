@@ -5,6 +5,8 @@ import { lexicalEditor } from "@payloadcms/richtext-lexical";
 import { sqliteAdapter } from "@payloadcms/db-sqlite";
 import { postgresAdapter } from "@payloadcms/db-postgres";
 import { s3Storage } from "@payloadcms/storage-s3";
+import { en } from "@payloadcms/translations/languages/en";
+import { ja } from "@payloadcms/translations/languages/ja";
 import sharp from "sharp";
 import { migrations } from "./migrations";
 
@@ -58,6 +60,11 @@ export default buildConfig({
   admin: {
     user: Users.slug,
     meta: { titleSuffix: "- アストラ CMS" },
+  },
+  // 管理画面のUI言語（デフォルト日本語）
+  i18n: {
+    supportedLanguages: { ja, en },
+    fallbackLanguage: "ja",
   },
   collections: [Users, Posts, Voice, Media],
   plugins,
