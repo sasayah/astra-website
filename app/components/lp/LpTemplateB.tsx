@@ -331,15 +331,15 @@ export default function LpTemplateB({ item, city }: { item: LpItem; city?: LpCit
                 回収量<span className="lp-required">必須</span>
               </legend>
               <label>
-                <input type="radio" name="quantity_id" value="単品" defaultChecked />
+                <input type="radio" name="quantity_id" className="input-service" value="単品" defaultChecked />
                 <span>{item.name}のみ（単品）</span>
               </label>
               <label>
-                <input type="radio" name="quantity_id" value="軽トラック1台分" />
+                <input type="radio" name="quantity_id" className="input-service" value="軽トラック1台分" />
                 <span>ほかにも数点まとめて（軽トラック1台分まで）</span>
               </label>
               <label>
-                <input type="radio" name="quantity_id" value="2tトラック1台分" />
+                <input type="radio" name="quantity_id" className="input-service" value="2tトラック1台分" />
                 <span>お部屋まるごと・大量（トラック積み放題）</span>
               </label>
             </fieldset>
