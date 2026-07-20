@@ -9,8 +9,9 @@
 const LINE_PUSH_API = "https://api.line.me/v2/bot/message/push";
 
 export async function sendLineNotification(text: string): Promise<boolean> {
-  const token = process.env.LINE_CHANNEL_ACCESS_TOKEN;
-  const to = process.env.LINE_GROUP_ID;
+  // 環境変数コピペ時の前後空白・改行混入に耐える（過去にDATABASE_URIで実害あり）
+  const token = process.env.LINE_CHANNEL_ACCESS_TOKEN?.trim();
+  const to = process.env.LINE_GROUP_ID?.trim();
   if (!token || !to) {
     console.log("[line] LINE_CHANNEL_ACCESS_TOKEN / LINE_GROUP_ID 未設定のため送信スキップ");
     return false;
