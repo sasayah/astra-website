@@ -1,0 +1,12 @@
+/* 管理画面のカスタムスタイル。
+ * スマホ（タッチ端末・小画面）ではリッチテキストの「＋」ブロック追加・
+ * ドラッグハンドル・スラッシュメニューを非表示にし、文章入力だけに絞る。
+ * （運用者はスマホ操作が基本のため、誤操作でブロックUIを開かないように）
+ * PCではそのまま使える（「/」で見出し・画像の挿入が可能）。 */
+@media (max-width: 767px), (pointer: coarse) {
+  .add-block-menu,
+  .draggable-block-menu,
+  .slash-menu {
+    display: none !important;
+  }
+}

@@ -1,4 +1,14 @@
 import type { CollectionConfig } from "payload";
+import {
+  BoldFeature,
+  HeadingFeature,
+  InlineToolbarFeature,
+  ItalicFeature,
+  LinkFeature,
+  ParagraphFeature,
+  UploadFeature,
+  lexicalEditor,
+} from "@payloadcms/richtext-lexical";
 import { isAdmin, isEditorOrAdmin } from "./access";
 
 /** ブログ記事。旧サイトの /blog/{id}.html を移行し、以後は管理画面で投稿・編集する。
@@ -38,7 +48,23 @@ export const Posts: CollectionConfig = {
       name: "content",
       type: "richText",
       label: "本文",
-      admin: { description: "画像は本文内の「+」からアップロードして挿入できます" },
+      // 誤操作を減らすため機能を最小限に絞る（段落・見出し・太字/斜体・リンク・画像のみ。
+      // 表・引用・チェックリスト等は無効）。スマホでは文章入力だけの想定
+      editor: lexicalEditor({
+        features: [
+          ParagraphFeature(),
+          HeadingFeature({ enabledHeadingSizes: ["h2", "h3"] }),
+          BoldFeature(),
+          ItalicFeature(),
+          LinkFeature(),
+          UploadFeature(),
+          InlineToolbarFeature(),
+        ],
+      }),
+      admin: {
+        description:
+          "文章を入力するだけでOKです。パソコンで開いた場合は、行頭で「/」を入力すると見出しや画像を挿入できます。",
+      },
     },
     {
       name: "publishedAt",
