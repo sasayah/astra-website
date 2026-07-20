@@ -61,6 +61,17 @@ export default function Header() {
         </div>
         <div className="menu sp"><a href="#"><img src={`${TPL}/img/common/menu.png`} width={45} alt="MENU" /></a></div>
       </div>
+      {/* スマホ専用CTA行（PCでは非表示）。電話＝主導線、フォーム＝副導線 */}
+      <div className="spCtaRow sp">
+        <a href="tel:0120709333" className="spCtaTel">
+          <span className="num">0120-709-333</span>
+          <span className="note">通話無料・24時間・年中無休</span>
+        </a>
+        <a href="/contact" className="spCtaMail">
+          <span className="num">無料お見積り</span>
+          <span className="note">メールで相談・写真見積もりOK</span>
+        </a>
+      </div>
       <div className="menuBox">
         <ul className="navi">
           <li>

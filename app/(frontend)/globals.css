@@ -4,6 +4,76 @@
  * テーマの見た目を壊すため撤去した。
  */
 
+/* ==== スマホ用ヘッダー再構成 ====
+ * 旧テーマのSPヘッダーはPC用要素（クレカ表記・許可番号バッジ・縮小ロゴ）を
+ * 詰め込んで判読不能だった。SPでは「ロゴ／電話／無料見積り／メニュー」だけに絞る。
+ * PC(768px〜)は旧テーマのまま。詳細度・!importantは後読みの旧style.css対策 */
+.spCtaRow {
+  display: none;
+}
+@media screen and (max-width: 767px) {
+  body #gHeader {
+    padding: 0;
+  }
+  body #gHeader .hBox {
+    display: flex;
+    align-items: center;
+    min-height: 48px;
+    padding: 4px 56px 4px 10px; /* 右は固定ハンバーガー(45px)ぶん空ける */
+    box-sizing: border-box;
+  }
+  body #gHeader .header-badge-container {
+    width: auto;
+  }
+  body #gHeader .header-badge-container img {
+    margin-top: 0;
+    width: 170px;
+    display: block;
+  }
+  /* 許可番号バッジとPC用右ブロック（クレカ・PC電話・PC問い合わせ）はSPでは出さない */
+  body #gHeader .header-badge-container .header-badge,
+  body #gHeader .rBox {
+    display: none !important;
+  }
+  .spCtaRow {
+    display: flex;
+    gap: 6px;
+    padding: 0 8px 8px;
+  }
+  .spCtaRow a {
+    flex: 1 1 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 52px;
+    border-radius: 8px;
+    text-decoration: none;
+    line-height: 1.25;
+    padding: 6px 2px;
+  }
+  .spCtaRow .num {
+    font-size: 1.7rem;
+    font-weight: 700;
+    color: #fff;
+    white-space: nowrap;
+  }
+  .spCtaRow .note {
+    font-size: 1rem;
+    color: #fff;
+    opacity: 0.95;
+    white-space: nowrap;
+  }
+  a.spCtaTel {
+    background: #1ea54c;
+    box-shadow: 0 2px 0 #157a38;
+  }
+  a.spCtaMail {
+    background: linear-gradient(180deg, #ff9a2e, #f07800);
+    box-shadow: 0 2px 0 #c25f00;
+  }
+}
+
 /* SPメニュー: サブメニュー開閉アイコン(.ico)のタップ領域を13px→44pxに拡大。
  * 見た目のアイコンサイズは background-size で従来の13pxのまま、中心位置も維持する。
  * span付きセレクタで旧テーマstyle.css（読み込み順が後）より詳細度を上げている。 */
