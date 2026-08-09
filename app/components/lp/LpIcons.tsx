@@ -257,6 +257,11 @@ const SHORT_LABELS: Record<IconName, string> = {
   star: "アストラの強み",
 };
 
-export function shortLabelFor(name: IconName): string {
+/**
+ * 一言見出しを返す。
+ * wide=広域LP（kagu/kaden）では拠点前提の「最短20分」を使わない（憲法5）。
+ */
+export function shortLabelFor(name: IconName, wide = false): string {
+  if (name === "clock" && wide) return "最短当日・即日OK";
   return SHORT_LABELS[name];
 }

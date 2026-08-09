@@ -296,7 +296,7 @@ export default function LpTemplate({ item, city }: { item: LpItem; city?: LpCity
                 <li key={p}>
                   <UtilIcon name={ico} className="lp-reasons__fig" />
                   <div className="lp-reasons__body">
-                    {dup ? null : <b className="lp-reasons__head">{shortLabelFor(ico)}</b>}
+                    {dup ? null : <b className="lp-reasons__head">{shortLabelFor(ico, wide)}</b>}
                     <p className={dup ? "lp-reasons__solo" : undefined}>{t(p)}</p>
                   </div>
                 </li>

@@ -1,24 +1,35 @@
 /**
- * 「人っけ」リデザイン（アストくん）のA/B配布設定。
+ * 「人っけ」リデザイン（アストくん）の配信設定。
  *
- * 第1弾は16品目を消化額がほぼ均衡する2群に分け、片群のみ新デザインを配信する
- * （検証設計は docs/lp-hitoke-redesign 参照。判定KPI=電話タップ率、2週間）。
- *   新デザイン群 ≈ 30日消化 12.0万円 / 現行維持群 ≈ 13.5万円
- * 全面展開するときは ALL_SLUGS をそのまま入れる。
+ * 2026-08-09: 品目分割A/Bは取りやめ、**全16品目に展開**（オーナー判断）。
+ * 理由: 単品キャンペーンのCVは2週間で片群10数件しか貯まらず統計的有意差が出ないため、
+ * 群を分けても効果を切り分けられない。それなら全トラフィックに当てて月次の前後比較で見る。
+ *
+ * ロールバックはこの集合を空にするだけ（`new Set<string>([])`）。
+ * 部分配信に戻す場合も、ここに残したいslugだけを列挙すればよい。
  */
 
-export const HITOKE_SLUGS = new Set<string>([
-  "reizouko", // 冷蔵庫（最大消化）
+/** 全品目（content/lp-items.json の slug と一致させること） */
+export const ALL_SLUGS = [
+  "reizouko", // 冷蔵庫
+  "sentakuki", // 洗濯機
+  "tv", // テレビ
+  "aircon", // エアコン
+  "mattress", // マットレス
+  "bed", // ベッド
   "tansu", // タンス
   "sofa", // ソファ
-  "jitensha", // 自転車
   "desk", // 学習机
-  "monitor", // モニター
-  "sentakuki", // 洗濯機（配信再開したて）
+  "piano", // ピアノ
+  "jitensha", // 自転車
+  "futon", // 布団
+  "monitor", // 液晶モニター
+  "kagu", // 大型家具（広域LP）
+  "kaden", // 家電製品（広域LP）
   "sodaigomi", // 粗大ごみ
-]);
-// 現行維持（対照群）: aircon / tv / mattress / piano / futon / bed / kagu / kaden
-// ※ kagu は大型キャンペーン（tCPA学習中）の主要リンク先のため対照群に固定
+] as const;
+
+export const HITOKE_SLUGS = new Set<string>(ALL_SLUGS);
 
 export function hitokeEnabled(slug: string): boolean {
   return HITOKE_SLUGS.has(slug);
