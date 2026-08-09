@@ -3,6 +3,11 @@ import { SINGLE_ITEM_PRICES, lpCopy, priceOf } from "@/app/lib/lp-data";
 import LpDisposalOptions from "@/app/components/lp/LpDisposalOptions";
 import { voicesForItem } from "@/app/lib/voices";
 import GoogleRatingBadge from "@/app/components/GoogleRatingBadge";
+import { hitokeEnabled } from "@/app/lib/lp-hitoke";
+import { AstoNote } from "@/app/components/lp/LpHitoke";
+import { CompareTriptych, TruckLoadFigure, VoiceAvatar } from "@/app/components/lp/LpFigures";
+import UtilIcon, { iconForText } from "@/app/components/lp/LpIcons";
+import ItemIcon from "@/app/components/lp/ItemIcon";
 
 const TEL = "0120-709-333";
 const TEL_HREF = "tel:0120709333";
@@ -40,7 +45,7 @@ function TelBlock() {
     <div className="lpb-telblock">
       <p className="lpb-telblock__lead">お急ぎの方はお電話が最速です</p>
       <a className="lp-tel" href={TEL_HREF}>
-        <span className="lp-tel__hint">通話料無料・24時間365日受付</span>
+        <span className="lp-tel__hint">通話料無料・8:00〜20:00受付</span>
         <span className="lp-tel__num">
           <IcoPhone className="lp-tel__ico" />
           {TEL}
@@ -66,6 +71,8 @@ export default function LpTemplateB({ item, city }: { item: LpItem; city?: LpCit
   const lpLabel = `B:${item.name} ${area}`;
   const t = (s: string) => lpCopy(s, item, city);
   const price = priceOf(item.slug);
+  // 「人っけ」A/B（アストくん）。B案は価格ファースト構成を崩さないよう2箇所のみ
+  const hitoke = hitokeEnabled(item.slug);
   return (
     <main className="lp lp--b">
       {/* ファーストビュー: 価格ファースト */}
@@ -80,6 +87,11 @@ export default function LpTemplateB({ item, city }: { item: LpItem; city?: LpCit
             {area}の{item.name}
             {item.kw.split("・")[0]}
           </h1>
+          {hitoke ? (
+            <AstoNote pose="greet" small>
+              {item.name}の回収料金はこちらです。写真を送るだけのLINE見積もりもできます！
+            </AstoNote>
+          ) : null}
           <div className="lpb-price-card">
             <p className="lpb-price-card__label">{item.name}の回収 参考価格</p>
             <p className="lpb-price-card__price">
@@ -109,7 +121,10 @@ export default function LpTemplateB({ item, city }: { item: LpItem; city?: LpCit
       {/* 悪徳業者注意（信頼） */}
       <section className="lpb-warn">
         <div className="lp-inner">
-          <h2 className="lpb-warn__title">「無料回収」をうたう業者にご注意ください</h2>
+          <h2 className="lpb-warn__title">
+            {hitoke ? <UtilIcon name="shield" className="lpb-warn__fig" /> : null}
+            「無料回収」をうたう業者にご注意ください
+          </h2>
           <p>
             トラックで巡回し「無料で回収します」と声をかけ、積み込み後に高額請求するトラブルが増えています。
             アストラは<strong>作業前に確定金額をご提示</strong>し、
@@ -138,7 +153,16 @@ export default function LpTemplateB({ item, city }: { item: LpItem; city?: LpCit
               <tbody>
                 {SINGLE_ITEM_PRICES.map((p) => (
                   <tr key={p.slug} className={p.slug === item.slug ? "is-current" : ""}>
-                    <td>{p.name}</td>
+                    <td>
+                      {hitoke ? (
+                        <span className="lpb-pricelist__name">
+                          <ItemIcon slug={p.slug} className="lpb-pricelist__ico" />
+                          {p.name}
+                        </span>
+                      ) : (
+                        p.name
+                      )}
+                    </td>
                     <td className="lpb-pricelist__price">{p.price}</td>
                     <td>{p.note ?? "-"}</td>
                   </tr>
@@ -160,6 +184,25 @@ export default function LpTemplateB({ item, city }: { item: LpItem; city?: LpCit
             </div>
           </details>
           <h3 className="lp-subtitle">まとめて処分ならトラック積み放題がお得</h3>
+          {hitoke ? (
+            <ul className="lp-loads">
+              <li>
+                <TruckLoadFigure level="quarter" />
+                <b>1点〜数点</b>
+                <span>{item.name}だけでもOK</span>
+              </li>
+              <li>
+                <TruckLoadFigure level="half" />
+                <b>荷台の半分</b>
+                <span>数点まとめて</span>
+              </li>
+              <li>
+                <TruckLoadFigure level="full" />
+                <b>積み放題</b>
+                <span>お部屋まるごと</span>
+              </li>
+            </ul>
+          ) : null}
           <div className="lp-trucks">
             <img
               src={`${UP}/2021/07/s_truck.jpg`}
@@ -195,6 +238,7 @@ export default function LpTemplateB({ item, city }: { item: LpItem; city?: LpCit
               <p>{t(item.recycleLawNote)}</p>
             </div>
           ) : null}
+          {hitoke ? <CompareTriptych speed={wide ? "最短当日" : "最短20分"} /> : null}
           <LpDisposalOptions item={item} />
         </div>
       </section>
@@ -252,12 +296,16 @@ export default function LpTemplateB({ item, city }: { item: LpItem; city?: LpCit
                   <li key={v.name}>
                     <p>{v.text}</p>
                     <div className="lp-voices__meta">
-                      <svg className="lp-voices__ico" viewBox="0 0 24 24" aria-hidden="true">
-                        <path
-                          fill="currentColor"
-                          d="M12 12a5 5 0 1 0-5-5 5 5 0 0 0 5 5zm0 2.5c-4 0-8 2-8 4.5v2h16v-2c0-2.5-4-4.5-8-4.5z"
-                        />
-                      </svg>
+                      {hitoke ? (
+                        <VoiceAvatar name={v.name} />
+                      ) : (
+                        <svg className="lp-voices__ico" viewBox="0 0 24 24" aria-hidden="true">
+                          <path
+                            fill="currentColor"
+                            d="M12 12a5 5 0 1 0-5-5 5 5 0 0 0 5 5zm0 2.5c-4 0-8 2-8 4.5v2h16v-2c0-2.5-4-4.5-8-4.5z"
+                          />
+                        </svg>
+                      )}
                       <span>
                         {v.name}さん<small>Googleのクチコミより</small>
                       </span>
@@ -304,10 +352,13 @@ export default function LpTemplateB({ item, city }: { item: LpItem; city?: LpCit
             <span className="lp-title__sub">FAQ</span>
             よくあるご質問
           </h2>
-          <div className="lp-faq">
+          <div className={hitoke ? "lp-faq lp-faq--ico" : "lp-faq"}>
             {item.faq.map((f) => (
               <details key={f.q}>
-                <summary>{t(f.q)}</summary>
+                <summary>
+                  {hitoke ? <UtilIcon name={iconForText(t(f.q))} className="lp-faq__fig" /> : null}
+                  {t(f.q)}
+                </summary>
                 <p>{t(f.a)}</p>
               </details>
             ))}
@@ -400,6 +451,11 @@ export default function LpTemplateB({ item, city }: { item: LpItem; city?: LpCit
             {area}の{item.name}
             {item.kw}は、今日アストラにお任せください
           </h2>
+          {hitoke ? (
+            <AstoNote pose="point">
+              ご都合のよい日時をご指定いただけます。まずはお気軽にご相談ください！
+            </AstoNote>
+          ) : null}
           <div className="lp-cta-card lp-cta-card--dark">
             <TelBlock />
           </div>
@@ -412,7 +468,7 @@ export default function LpTemplateB({ item, city }: { item: LpItem; city?: LpCit
           <IcoPhone className="lp-sticky__ico" />
           <span>
             <strong>{TEL}</strong>
-            <small>タップで電話・24時間受付</small>
+            <small>タップで電話・8:00〜20:00</small>
           </span>
         </a>
         <a href={LINE_URL} target="_blank" rel="noopener" className="lp-sticky__line">

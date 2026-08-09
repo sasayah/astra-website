@@ -82,14 +82,19 @@ node scripts/normalize-content.mjs   # HTML正規化（ハイドレーション�
 - CV計測: GTM（`NEXT_PUBLIC_GTM_ID=GTM-MCVFLTS`）が tel:クリック / line.me クリック /
   `/contact/thanks` PV でYahoo CVを発火。ytagサイトジェネラルタグは `YahooTag` が全ページに設置。
   簡易見積（simple_form）成功時のみコードから直接フォームCVを発火（`app/lib/yahoo.ts`）。
-- 広告アカウントの分析・改善アクションは `docs/yahoo-ads-analysis.md` / `docs/yahoo-ads-actions.md`。
+- **同じGTMコンテナから Google広告（AW-369415089）のCVも発火する**（tel: / line.me / `/contact/thanks` /
+  `id=submit_button` クリック / `class=input-service` クリックの5トリガー）。Google側は独立した gtag を
+  持たないため、GTMが動かないとGoogle広告のCVは全滅する。
+- 広告アカウントの分析・改善アクション:
+  - Yahoo: `docs/yahoo-ads-analysis.md` / `docs/yahoo-ads-actions.md`
+  - Google: `docs/google-ads-analysis.md` / `docs/google-ads-actions.md`（2026-07時点で全キャンペーン停止中）
 
 ## Railway デプロイ
 
 - ビルダー: Nixpacks（`railway.json` 参照）。`npm run build` → `npm run start`。
 - `next start` は Railway の `PORT` を自動で使用。ヘルスチェックは `/`。
 - 環境変数（`.env.example` 参照）:
-  - `NEXT_PUBLIC_GTM_ID` … 本番切替時に `GTM-MCVFLTS` を設定（未設定だとYahoo広告CV計測が止まる）
+  - `NEXT_PUBLIC_GTM_ID` … 本番切替時に `GTM-MCVFLTS` を設定（未設定だと Yahoo・Google 両方の広告CV計測が止まる）
   - `RESEND_API_KEY` … 未設定でもフォームは動作し内容をログ出力（本番では必須）
   - `MAIL_TO` … 管理者受信アドレス（既定 `info@pe-astra.com`）
   - `MAIL_FROM` … 差出人（Resend で認証済みの独自ドメインアドレス）

@@ -3,6 +3,17 @@ import { lpCopy } from "@/app/lib/lp-data";
 import LpDisposalOptions from "@/app/components/lp/LpDisposalOptions";
 import { voicesForItem } from "@/app/lib/voices";
 import GoogleRatingBadge from "@/app/components/GoogleRatingBadge";
+import { hitokeEnabled, painPersonFor } from "@/app/lib/lp-hitoke";
+import { AstoNote, LpBadges3, LpHeroVisual, StaffNote } from "@/app/components/lp/LpHitoke";
+import {
+  CompareTriptych,
+  FlowFigure,
+  PainFigure,
+  PriceFlowFigure,
+  TruckLoadFigure,
+  VoiceAvatar,
+} from "@/app/components/lp/LpFigures";
+import UtilIcon, { iconForText, shortLabelFor } from "@/app/components/lp/LpIcons";
 
 const TEL = "0120-709-333";
 const TEL_HREF = "tel:0120709333";
@@ -60,7 +71,7 @@ function IcoLine({ className = "" }: { className?: string }) {
 function TelButton() {
   return (
     <a className="lp-tel" href={TEL_HREF}>
-      <span className="lp-tel__hint">通話料無料・24時間365日受付</span>
+      <span className="lp-tel__hint">通話料無料・8:00〜20:00受付</span>
       <span className="lp-tel__num">
         <IcoPhone className="lp-tel__ico" />
         {TEL}
@@ -97,8 +108,50 @@ export default function LpTemplate({ item, city }: { item: LpItem; city?: LpCity
     ["見積り・相談", "0円"],
     [`${area}全域`, "対応"],
   ];
+  // 「人っけ」A/B（アストくん）。対象品目は lp-hitoke.ts で管理
+  const hitoke = hitokeEnabled(item.slug);
+  // 大阪市役所での紹介 = 最大の信用。hitoke時はヒーロー直下に置く
+  const trustSection = (
+    <section className={hitoke ? "lp-sec lp-sec--trust" : "lp-sec lp-sec--tint"}>
+      <div className="lp-inner">
+        <h2 className="lp-title">
+          <span className="lp-title__sub">TRUST</span>
+          大阪市役所で紹介中のサービスです
+        </h2>
+        <figure className="lp-photo">
+          <img
+            src={`${UP}/2025/01/S__206430216-1.jpg`}
+            alt="大阪市西淀川区役所のデジタルサイネージで紹介されているアストラの広告"
+            loading={hitoke ? undefined : "lazy"}
+          />
+          <figcaption>大阪市西淀川区役所のデジタルサイネージで紹介されています</figcaption>
+        </figure>
+        {hitoke ? (
+          <ul className="lp-trustpoints">
+            <li>
+              <UtilIcon name="house" />
+              <b>西淀川区の地元業者</b>
+            </li>
+            <li>
+              <UtilIcon name="cert" />
+              <b>古物商許可 取得済</b>
+            </li>
+            <li>
+              <UtilIcon name="recycle" />
+              <b>法令に沿って適正処分</b>
+            </li>
+          </ul>
+        ) : (
+          <p className="lp-trust__text">
+            アストラは大阪市西淀川区に拠点を置く地元の回収業者です。古物商許可（第631171800026号）を取得し、
+            法令に沿った適正な回収・処分を行っています。
+          </p>
+        )}
+      </div>
+    </section>
+  );
   return (
-    <main className="lp">
+    <main className={hitoke ? "lp lp--hitoke" : "lp"}>
       {/* ファーストビュー */}
       <section className="lp-hero">
         <div className="lp-inner">
@@ -107,23 +160,44 @@ export default function LpTemplate({ item, city }: { item: LpItem; city?: LpCity
             大阪市西淀川区役所のサイネージで紹介中
           </p>
           <h1 className="lp-hero__title">{t(item.h1)}</h1>
-          <ul className="lp-merits">
-            {merits.map(([a, b]) => (
-              <li key={a}>
-                <strong>{a}</strong>
-                <span>{b}</span>
-              </li>
-            ))}
-          </ul>
-          <p className="lp-hero__lead">{t(item.lead)}</p>
+          {hitoke ? (
+            <>
+              <LpHeroVisual itemSlug={item.slug} itemName={item.name} />
+              <LpBadges3 wide={wide} />
+              <p className="lp-badges3__note">8:00〜20:00受付・日時指定OK・{area}全域対応</p>
+            </>
+          ) : (
+            <>
+              <ul className="lp-merits">
+                {merits.map(([a, b]) => (
+                  <li key={a}>
+                    <strong>{a}</strong>
+                    <span>{b}</span>
+                  </li>
+                ))}
+              </ul>
+              <p className="lp-hero__lead">{t(item.lead)}</p>
+            </>
+          )}
           <div className="lp-cta-card">
             <TelButton />
+            {hitoke ? <StaffNote /> : null}
             <LineButton />
             <p className="lp-cta-card__note">
               買取できる{item.name}は<strong>買取額でお値引き</strong>
               。まずは状態をお知らせください。
             </p>
           </div>
+          {hitoke ? (
+            <>
+              <GoogleRatingBadge />
+              {/* 詳しい説明は畳んで、ファーストビューの文字量を抑える */}
+              <details className="lp-more">
+                <summary>{item.name}の処分について詳しく</summary>
+                <p>{t(item.lead)}</p>
+              </details>
+            </>
+          ) : null}
           <img
             className="lp-banner"
             src={`${UP}/2022/01/amazon2.jpeg`}
@@ -132,25 +206,31 @@ export default function LpTemplate({ item, city }: { item: LpItem; city?: LpCity
         </div>
       </section>
 
+      {/* 市役所トラスト（hitoke時はヒーロー直下＝最大の信用を先に見せる） */}
+      {hitoke ? trustSection : null}
+
       {/* 実績バー */}
       <div className="lp-stats">
         <div className="lp-inner lp-stats__row">
           <div className="lp-stats__item">
+            {hitoke ? <UtilIcon name="truck" className="lp-stats__fig" /> : null}
             <span className="lp-stats__label">総合実績</span>
             <span className="lp-stats__value">
               <em>10,000</em>件
             </span>
           </div>
           <div className="lp-stats__item">
+            {hitoke ? <UtilIcon name="star" className="lp-stats__fig" /> : null}
             <span className="lp-stats__label">お客様満足度</span>
             <span className="lp-stats__value">
               <em>98.8</em>%
             </span>
           </div>
           <div className="lp-stats__item">
+            {hitoke ? <UtilIcon name="phone" className="lp-stats__fig" /> : null}
             <span className="lp-stats__label">電話受付</span>
             <span className="lp-stats__value">
-              <em>24</em>時間365日
+              8:00〜20:00
             </span>
           </div>
         </div>
@@ -163,10 +243,15 @@ export default function LpTemplate({ item, city }: { item: LpItem; city?: LpCity
             <span className="lp-title__sub">CHECK</span>
             こんなお困りごとはありませんか？
           </h2>
-          <ul className="lp-pains">
+          {hitoke ? <PainFigure itemSlug={item.slug} kind={painPersonFor(item.slug)} /> : null}
+          <ul className={hitoke ? "lp-pains lp-pains--ico" : "lp-pains"}>
             {item.pains.map((p) => (
               <li key={p}>
-                <IcoCheck className="lp-pains__ico" />
+                {hitoke ? (
+                  <UtilIcon name={iconForText(t(p))} className="lp-pains__fig" />
+                ) : (
+                  <IcoCheck className="lp-pains__ico" />
+                )}
                 {t(p)}
               </li>
             ))}
@@ -193,14 +278,36 @@ export default function LpTemplate({ item, city }: { item: LpItem; city?: LpCity
           <ol className="lp-reasons">
             {[
               ...item.points,
-              "女性スタッフ在籍。女性のおひとり暮らしやご年配の方のお宅への訪問も安心です。",
-            ].map((p, i) => (
-              <li key={p}>
-                <span className="lp-reasons__num">{String(i + 1).padStart(2, "0")}</span>
-                <p>{t(p)}</p>
-              </li>
-            ))}
+              "女性スタッフ在籍。女性のおひとり暮らしやご年配の方も安心してご相談いただけます。",
+            ].map((p, i, all) => {
+              if (!hitoke) {
+                return (
+                  <li key={p}>
+                    <span className="lp-reasons__num">{String(i + 1).padStart(2, "0")}</span>
+                    <p>{t(p)}</p>
+                  </li>
+                );
+              }
+              // 一言見出しを先に大きく出し、元の説明文は補足として小さく置く。
+              // 同じ見出しが2回出ると読みにくいので、既出のものは見出しを省く
+              const ico = iconForText(t(p));
+              const dup = all.slice(0, i).some((q) => iconForText(t(q)) === ico);
+              return (
+                <li key={p}>
+                  <UtilIcon name={ico} className="lp-reasons__fig" />
+                  <div className="lp-reasons__body">
+                    {dup ? null : <b className="lp-reasons__head">{shortLabelFor(ico)}</b>}
+                    <p className={dup ? "lp-reasons__solo" : undefined}>{t(p)}</p>
+                  </div>
+                </li>
+              );
+            })}
           </ol>
+          {hitoke ? (
+            <AstoNote pose="greet">
+              西淀川区役所のサイネージでも紹介されています！お見積もりだけのご連絡も大歓迎です
+            </AstoNote>
+          ) : null}
           <figure className="lp-photo">
             <img
               src={`${UP}/2021/06/1624678116531.jpg`}
@@ -220,8 +327,21 @@ export default function LpTemplate({ item, city }: { item: LpItem; city?: LpCity
               <span className="lp-title__sub">POINT</span>
               {item.name}の処分で知っておきたいこと
             </h2>
-            <div className="lp-law">
-              <p>{t(item.recycleLawNote)}</p>
+            <div className={hitoke ? "lp-law lp-law--ico" : "lp-law"}>
+              {hitoke ? <UtilIcon name="recycle" className="lp-law__fig" /> : null}
+              {hitoke ? (
+                <div>
+                  <b className="lp-law__head">
+                    {item.name}は自治体の粗大ごみに出せません。アストラなら回収できます
+                  </b>
+                  <details className="lp-more lp-more--plain">
+                    <summary>理由と手続きを見る</summary>
+                    <p>{t(item.recycleLawNote)}</p>
+                  </details>
+                </div>
+              ) : (
+                <p>{t(item.recycleLawNote)}</p>
+              )}
             </div>
           </div>
         </section>
@@ -234,12 +354,38 @@ export default function LpTemplate({ item, city }: { item: LpItem; city?: LpCity
             <span className="lp-title__sub">PRICE</span>
             料金について
           </h2>
-          <p className="lp-price__intro">
-            {item.name}
-            1点だけでも喜んでお伺いします。サイズ・階数・搬出経路を確認のうえ、
-            <strong>作業前にその場で確定金額</strong>
-            をご提示。確定後の追加料金は0円で、金額にご納得いただけなければその場でお断りいただけます（お見積もりは0円です）。
-          </p>
+          {hitoke ? (
+            <PriceFlowFigure itemName={item.name} />
+          ) : (
+            <p className="lp-price__intro">
+              {item.name}
+              1点だけでも喜んでお伺いします。サイズ・階数・搬出経路を確認のうえ、
+              <strong>作業前にその場で確定金額</strong>
+              をご提示。確定後の追加料金は0円で、金額にご納得いただけなければその場でお断りいただけます（お見積もりは0円です）。
+            </p>
+          )}
+          {hitoke ? (
+            <>
+              <h3 className="lp-subtitle">軽トラック1台に、どのくらい載る？</h3>
+              <ul className="lp-loads">
+                <li>
+                  <TruckLoadFigure level="quarter" />
+                  <b>1点〜数点</b>
+                  <span>{item.name}だけでもお伺いします</span>
+                </li>
+                <li>
+                  <TruckLoadFigure level="half" />
+                  <b>荷台の半分</b>
+                  <span>数点まとめての処分に</span>
+                </li>
+                <li>
+                  <TruckLoadFigure level="full" />
+                  <b>積み放題</b>
+                  <span>お部屋まるごとの片付けに</span>
+                </li>
+              </ul>
+            </>
+          ) : null}
           <div className="lp-trucks">
             <img
               src={`${UP}/2021/07/s_truck.jpg`}
@@ -279,6 +425,14 @@ export default function LpTemplate({ item, city }: { item: LpItem; city?: LpCity
             </div>
           </details>
           <h3 className="lp-subtitle">{item.name}の処分方法くらべ</h3>
+          {hitoke ? (
+            <>
+              <CompareTriptych speed={speed} />
+              <AstoNote pose="ok" small>
+                迷ったら比べてみてください。アストラなら搬出までまるごとお任せです！
+              </AstoNote>
+            </>
+          ) : null}
           <LpDisposalOptions item={item} />
           <div className="lp-sec__cta">
             <p className="lp-cta-lead">今お電話いただければ、{speed}でお伺いできます</p>
@@ -320,29 +474,8 @@ export default function LpTemplate({ item, city }: { item: LpItem; city?: LpCity
         </div>
       </section>
 
-      {/* 市役所トラスト */}
-      <section className="lp-sec lp-sec--tint">
-        <div className="lp-inner">
-          <h2 className="lp-title">
-            <span className="lp-title__sub">TRUST</span>
-            大阪市役所で紹介中のサービスです
-          </h2>
-          <figure className="lp-photo">
-            <img
-              src={`${UP}/2025/01/S__206430216-1.jpg`}
-              alt="大阪市西淀川区役所のデジタルサイネージで紹介されているアストラの広告"
-              loading="lazy"
-            />
-            <figcaption>
-              大阪市西淀川区役所のデジタルサイネージで紹介されています
-            </figcaption>
-          </figure>
-          <p className="lp-trust__text">
-            アストラは大阪市西淀川区に拠点を置く地元の回収業者です。古物商許可（第631171800026号）を取得し、
-            法令に沿った適正な回収・処分を行っています。
-          </p>
-        </div>
-      </section>
+      {/* 市役所トラスト（hitoke時はヒーロー直下へ移動済み） */}
+      {hitoke ? null : trustSection}
 
       {/* ご利用の流れ */}
       <section className="lp-sec">
@@ -354,16 +487,19 @@ export default function LpTemplate({ item, city }: { item: LpItem; city?: LpCity
           <ol className="lp-flow">
             <li>
               <span className="lp-flow__step">STEP 1</span>
+              {hitoke ? <FlowFigure step={1} /> : null}
               <strong>お問い合わせ</strong>
               <p>電話・LINE・フォームからご連絡。写真があるとスムーズです。</p>
             </li>
             <li>
               <span className="lp-flow__step">STEP 2</span>
+              {hitoke ? <FlowFigure step={2} /> : null}
               <strong>無料見積もり</strong>
               <p>確定金額をご提示。ご納得いただいてから作業します。</p>
             </li>
             <li>
               <span className="lp-flow__step">STEP 3</span>
+              {hitoke ? <FlowFigure step={3} /> : null}
               <strong>回収作業</strong>
               <p>{speed}でお伺い。搬出はすべてスタッフにお任せください。</p>
             </li>
@@ -391,12 +527,16 @@ export default function LpTemplate({ item, city }: { item: LpItem; city?: LpCity
                   <li key={v.name}>
                     <p>{v.text}</p>
                     <div className="lp-voices__meta">
-                      <svg className="lp-voices__ico" viewBox="0 0 24 24" aria-hidden="true">
-                        <path
-                          fill="currentColor"
-                          d="M12 12a5 5 0 1 0-5-5 5 5 0 0 0 5 5zm0 2.5c-4 0-8 2-8 4.5v2h16v-2c0-2.5-4-4.5-8-4.5z"
-                        />
-                      </svg>
+                      {hitoke ? (
+                        <VoiceAvatar name={v.name} />
+                      ) : (
+                        <svg className="lp-voices__ico" viewBox="0 0 24 24" aria-hidden="true">
+                          <path
+                            fill="currentColor"
+                            d="M12 12a5 5 0 1 0-5-5 5 5 0 0 0 5 5zm0 2.5c-4 0-8 2-8 4.5v2h16v-2c0-2.5-4-4.5-8-4.5z"
+                          />
+                        </svg>
+                      )}
                       <span>
                         {v.name}さん<small>Googleのクチコミより</small>
                       </span>
@@ -416,10 +556,13 @@ export default function LpTemplate({ item, city }: { item: LpItem; city?: LpCity
             <span className="lp-title__sub">FAQ</span>
             よくあるご質問
           </h2>
-          <div className="lp-faq">
+          <div className={hitoke ? "lp-faq lp-faq--ico" : "lp-faq"}>
             {item.faq.map((f) => (
               <details key={f.q}>
-                <summary>{t(f.q)}</summary>
+                <summary>
+                  {hitoke ? <UtilIcon name={iconForText(t(f.q))} className="lp-faq__fig" /> : null}
+                  {t(f.q)}
+                </summary>
                 <p>{t(f.a)}</p>
               </details>
             ))}
@@ -444,20 +587,23 @@ export default function LpTemplate({ item, city }: { item: LpItem; city?: LpCity
           <form action="" method="post" className="simple_form lp-form">
             <input type="hidden" name="service_id" value="不用品回収" />
             <input type="hidden" name="lp" value={lpLabel} />
-            <fieldset>
+            <fieldset className={hitoke ? "lp-form__qty" : undefined}>
               <legend>
                 回収量<span className="lp-required">必須</span>
               </legend>
               <label>
                 <input type="radio" name="quantity_id" className="input-service" value="単品" defaultChecked />
+                {hitoke ? <TruckLoadFigure level="quarter" /> : null}
                 <span>{item.name}のみ（単品）</span>
               </label>
               <label>
                 <input type="radio" name="quantity_id" className="input-service" value="軽トラック1台分" />
+                {hitoke ? <TruckLoadFigure level="half" /> : null}
                 <span>ほかにも数点まとめて（軽トラック1台分まで）</span>
               </label>
               <label>
                 <input type="radio" name="quantity_id" className="input-service" value="2tトラック1台分" />
+                {hitoke ? <TruckLoadFigure level="full" /> : null}
                 <span>お部屋まるごと・大量（トラック積み放題）</span>
               </label>
             </fieldset>
@@ -517,6 +663,11 @@ export default function LpTemplate({ item, city }: { item: LpItem; city?: LpCity
             <br />
             今日アストラにお任せください
           </h2>
+          {hitoke ? (
+            <AstoNote pose="point">
+              ご都合のよい日時をご指定いただけます。まずはお気軽にご相談ください！
+            </AstoNote>
+          ) : null}
           <div className="lp-cta-card lp-cta-card--dark">
             <TelButton />
             <LineButton />
@@ -530,7 +681,7 @@ export default function LpTemplate({ item, city }: { item: LpItem; city?: LpCity
           <IcoPhone className="lp-sticky__ico" />
           <span>
             <strong>{TEL}</strong>
-            <small>タップで電話・24時間受付</small>
+            <small>タップで電話・8:00〜20:00</small>
           </span>
         </a>
         <a href={LINE_URL} target="_blank" rel="noopener" className="lp-sticky__line">
