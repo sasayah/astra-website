@@ -1375,3 +1375,770 @@
   font-size: 11px;
   color: var(--lp-muted);
 }
+
+/* ===== 人っけレイヤー（アストくん）=====
+ * A/B対象品目（lp-hitoke.ts）でのみ描画。
+ * 二層トーン: 丸ゴ・「！」は吹き出し内だけ。数字・許可情報は既存の固いデザインを維持 */
+
+.lp {
+  --lp-star: #f5a800;
+  --lp-maru: "Hiragino Maru Gothic ProN", "Hiragino Kaku Gothic ProN", "Noto Sans JP", sans-serif;
+}
+
+/* ヒーローのビジュアル帯 */
+.lp-hv {
+  position: relative;
+  border-radius: 14px;
+  overflow: hidden;
+  background: #ffeaC6;
+  border: 1px solid #f0dcae;
+  margin: 0 0 14px;
+  padding: 10px 10px 0;
+}
+.lp-hv__town {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 44px;
+  pointer-events: none;
+}
+.lp-hv__row {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.lp-hv__chara {
+  width: 37%;
+  max-width: 158px;
+  flex: none;
+  height: auto;
+}
+.lp-hv__bubble {
+  position: relative;
+  flex: 1;
+  background: #fff;
+  border: 2px solid var(--lp-star);
+  border-radius: 14px;
+  padding: 10px 12px;
+  margin: 0 0 14px;
+  font-family: var(--lp-maru);
+  font-weight: 700;
+  font-size: 14.5px;
+  line-height: 1.55;
+  text-align: left;
+  color: var(--lp-text);
+  box-shadow: 0 3px 10px rgba(148, 108, 24, 0.12);
+}
+.lp-hv__bubble::before {
+  content: "";
+  position: absolute;
+  left: -9px;
+  top: 50%;
+  transform: translateY(-50%);
+  border: 7px solid transparent;
+  border-right: 9px solid var(--lp-star);
+  border-left: 0;
+}
+.lp-hv__bubble::after {
+  content: "";
+  position: absolute;
+  left: -5.5px;
+  top: 50%;
+  transform: translateY(-50%);
+  border: 5.5px solid transparent;
+  border-right: 7.5px solid #fff;
+  border-left: 0;
+}
+
+/* 白抜き円バッジ3連 */
+.lp-badges3 {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  list-style: none;
+  padding: 0;
+  margin: 0 0 8px;
+}
+.lp-badges3 li {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  background: #fff;
+  border: 2.5px solid var(--lp-orange);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  box-shadow: 0 3px 10px rgba(148, 108, 24, 0.12);
+  line-height: 1.25;
+}
+.lp-badges3 small {
+  font-size: 11px;
+  font-weight: 800;
+  color: var(--lp-text);
+}
+.lp-badges3 strong {
+  font-size: 21px;
+  font-weight: 900;
+  color: var(--lp-red);
+}
+.lp-badges3__note {
+  text-align: center;
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--lp-muted);
+  margin: 0 0 16px;
+}
+
+/* セクション内のキャラ吹き出し */
+.lp-asto-note {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 18px 0 0;
+}
+.lp-asto-note__chara {
+  width: 76px;
+  flex: none;
+  height: auto;
+}
+.lp-asto-note--sm .lp-asto-note__chara {
+  width: 60px;
+}
+.lp-asto-note__bubble {
+  position: relative;
+  flex: 1;
+  background: #fff;
+  border: 2px solid var(--lp-star);
+  border-radius: 14px;
+  padding: 10px 14px;
+  margin: 0;
+  font-family: var(--lp-maru);
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 1.7;
+  text-align: left;
+}
+.lp-asto-note__bubble::before {
+  content: "";
+  position: absolute;
+  left: -9px;
+  top: 50%;
+  transform: translateY(-50%);
+  border: 7px solid transparent;
+  border-right: 9px solid var(--lp-star);
+  border-left: 0;
+}
+.lp-asto-note__bubble::after {
+  content: "";
+  position: absolute;
+  left: -5.5px;
+  top: 50%;
+  transform: translateY(-50%);
+  border: 5.5px solid transparent;
+  border-right: 7.5px solid #fff;
+  border-left: 0;
+}
+
+/* 電話CTA直近の女性スタッフ可視化 */
+.lp-staff-note {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font-size: 12.5px;
+  font-weight: 800;
+  color: var(--lp-text);
+  margin: 0;
+}
+.lp-staff-note__ico {
+  width: 17px;
+  height: 17px;
+  color: var(--lp-red);
+  flex: none;
+}
+
+/* クロージング（紺背景）でキャラの紺の作業服が沈まないよう白リムを敷く */
+.lp-closing .lp-asto-note__chara {
+  filter: drop-shadow(0 0 1.5px rgba(255, 255, 255, 0.9)) drop-shadow(0 0 6px rgba(255, 255, 255, 0.35));
+}
+
+/* ヒーロー下の評価バッジは余白を詰める（既存 .lp .g-rating:link の margin に勝つ詳細度で） */
+.lp-hero .g-rating,
+.lp-hero .g-rating:link,
+.lp-hero .g-rating:visited {
+  margin: 0 auto 4px;
+}
+
+@media (max-width: 380px) {
+  .lp-badges3 li {
+    width: 82px;
+    height: 82px;
+  }
+  .lp-badges3 strong {
+    font-size: 19px;
+  }
+}
+
+/* キャラ吹き出しの配置微調整（クロージング/B案ヒーロー） */
+.lp-closing .lp-asto-note,
+.lpb-hero .lp-asto-note {
+  margin: 0 0 14px;
+}
+
+/* デスクトップのヒーロービジュアル調整（吹き出しの間延び防止） */
+@media (min-width: 600px) {
+  .lp-hv__row {
+    justify-content: center;
+    gap: 14px;
+  }
+  .lp-hv__chara {
+    max-width: 200px;
+  }
+  .lp-hv__bubble {
+    flex: 0 1 auto;
+    max-width: 320px;
+    font-size: 16px;
+  }
+}
+
+/* ===== 人物・図解アセット ===== */
+
+/* ヒーロー背景（朝焼け＋街並み） */
+.lp-hv__sky {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+/* お悩みセクションの図 */
+.lp-painfig {
+  display: block;
+  width: 100%;
+  max-width: 300px;
+  height: auto;
+  margin: 0 auto 14px;
+}
+
+/* ご利用の流れ */
+.lp-flowfig {
+  display: block;
+  width: 108px;
+  height: auto;
+  margin: 0 auto 2px;
+}
+
+/* 積載量図解 */
+.lp-loads {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  list-style: none;
+  padding: 0;
+  margin: 0 0 18px;
+}
+.lp-loads li {
+  background: #fff;
+  border: 1px solid var(--lp-line);
+  border-radius: 12px;
+  padding: 10px 8px 8px;
+  text-align: center;
+}
+.lp-loadfig {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.lp-loads b {
+  display: block;
+  font-size: 13px;
+  font-weight: 800;
+  margin-top: 4px;
+}
+.lp-loads span {
+  display: block;
+  font-size: 11.5px;
+  color: var(--lp-muted);
+  line-height: 1.5;
+}
+
+/* 処分方法くらべの3コマ */
+.lp-compare3 {
+  display: grid;
+  gap: 12px;
+  list-style: none;
+  padding: 0;
+  margin: 0 0 18px;
+}
+.lp-compare3 li {
+  background: #fff;
+  border: 1px solid var(--lp-line);
+  border-radius: 12px;
+  padding: 12px 14px 14px;
+  text-align: center;
+}
+.lp-compare3 li.is-astra {
+  border: 2px solid var(--lp-orange);
+  background: var(--lp-amber-bg);
+}
+.lp-compare3__fig {
+  display: block;
+  width: 100%;
+  max-width: 190px;
+  height: auto;
+  margin: 0 auto 6px;
+}
+.lp-compare3 b {
+  display: block;
+  font-size: 15px;
+  font-weight: 900;
+}
+.lp-compare3 li.is-astra b {
+  color: var(--lp-red);
+}
+.lp-compare3 span {
+  display: block;
+  font-size: 13px;
+  color: var(--lp-muted);
+  line-height: 1.7;
+}
+
+/* お客様の声のアバター（頭文字＋名前由来の配色。似顔絵は作らない） */
+.lp-voices__avatar {
+  width: 30px;
+  height: 30px;
+  flex: none;
+  border-radius: 50%;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 800;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+
+@media (min-width: 600px) {
+  .lp-compare3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .lp-flowfig {
+    width: 118px;
+  }
+}
+
+/* ===== 汎用アイコン（文字だけの区間の削減） ===== */
+
+/* お困りごと */
+.lp-pains--ico li {
+  align-items: center;
+  gap: 12px;
+}
+.lp-pains__fig {
+  width: 34px;
+  height: 34px;
+  flex: none;
+}
+
+/* 選ばれる理由 */
+.lp-reasons__fig {
+  width: 34px;
+  height: 34px;
+  flex: none;
+  margin-top: 1px;
+}
+
+/* 実績バー */
+.lp-stats__fig {
+  width: 26px;
+  height: 26px;
+  display: block;
+  margin: 0 auto 2px;
+  color: #ffd76a;
+}
+.lp-stats__fig [stroke] {
+  stroke: #ffd76a;
+}
+.lp-stats__fig [fill="#fff3d0"],
+.lp-stats__fig [fill="#fff"] {
+  fill: rgba(255, 215, 106, 0.18);
+}
+.lp-stats__fig [fill="#ffc53d"] {
+  fill: #ffd76a;
+}
+.lp-stats__fig [fill="#e85d10"] {
+  fill: #ffd76a;
+}
+
+/* リサイクル法の注記 */
+.lp-law--ico {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+.lp-law__fig {
+  width: 32px;
+  height: 32px;
+  flex: none;
+}
+
+/* FAQ（Qバッジの代わりにカテゴリアイコン） */
+.lp-faq--ico summary {
+  padding-left: 52px;
+  display: flex;
+  align-items: center;
+  gap: 0;
+}
+.lp-faq--ico summary::before {
+  display: none;
+}
+.lp-faq__fig {
+  position: absolute;
+  left: 13px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 28px;
+  height: 28px;
+}
+
+/* フォームの回収量（積載量図つき） */
+.lp-form__qty label {
+  align-items: center;
+}
+.lp-form__qty .lp-loadfig {
+  width: 62px;
+  flex: none;
+}
+
+/* B案: 品目別料金表のアイコン */
+.lpb-pricelist__name {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.lpb-pricelist__ico {
+  width: 26px;
+  height: 26px;
+  flex: none;
+}
+
+/* B案: 悪徳業者注意 */
+.lpb-warn__fig {
+  width: 26px;
+  height: 26px;
+  vertical-align: -6px;
+  margin-right: 6px;
+}
+
+/* ===== わかりやすさ強化（hitoke時のみ・.lp--hitoke で対照群と分離） ===== */
+
+/* 1. セクションの区切りを色で立てる（白/薄グレー交互 → クリーム/白の明確な交互） */
+.lp--hitoke .lp-sec--tint {
+  background: #fff8ec;
+}
+.lp--hitoke .lp-sec--trust {
+  background: linear-gradient(180deg, #223350 0%, #1b2a44 100%);
+  color: #fff;
+}
+.lp--hitoke .lp-sec--trust .lp-title {
+  color: #fff;
+}
+.lp--hitoke .lp-sec--trust .lp-title__sub {
+  color: #ffd76a;
+}
+.lp--hitoke .lp-sec--trust .lp-trust__text {
+  color: #d7dfec;
+}
+.lp--hitoke .lp-sec--trust figcaption {
+  color: #ffd76a;
+  font-weight: 700;
+}
+
+/* 2. セクション見出しをリボンバッジに（POINT型・一目で区切りが分かる） */
+.lp--hitoke .lp-title__sub {
+  display: block;
+  width: fit-content;
+  margin: 0 auto 12px;
+  background: var(--lp-red);
+  color: #fff;
+  font-size: 11.5px;
+  letter-spacing: 0.18em;
+  padding: 5px 18px 4px;
+  border-radius: 999px;
+}
+.lp--hitoke .lp-sec--trust .lp-title__sub {
+  background: #ffd76a;
+  color: #22334d;
+}
+.lp--hitoke .lp-title {
+  font-size: 25px;
+}
+
+/* 3. 円バッジを「×」でつなぎ、数字のジャンプ率を上げる */
+.lp--hitoke .lp-badges3 {
+  gap: 2px;
+  align-items: center;
+}
+.lp-badges3__x {
+  width: auto !important;
+  height: auto !important;
+  border: none !important;
+  background: none !important;
+  box-shadow: none !important;
+  font-size: 19px;
+  font-weight: 900;
+  color: var(--lp-navy);
+  opacity: 0.45;
+  flex: none;
+}
+.lp--hitoke .lp-badges3 li:not(.lp-badges3__x) {
+  width: 98px;
+  height: 98px;
+}
+.lp--hitoke .lp-badges3 strong {
+  font-size: 25px;
+  line-height: 1.1;
+}
+.lp--hitoke .lp-badges3 small {
+  font-size: 10.5px;
+}
+
+/* 4. 実績バーの数字を大きく */
+.lp--hitoke .lp-stats__value {
+  font-size: 17px;
+}
+.lp--hitoke .lp-stats__value em {
+  font-size: 26px;
+  font-style: normal;
+}
+
+@media (max-width: 380px) {
+  .lp--hitoke .lp-badges3 li:not(.lp-badges3__x) {
+    width: 88px;
+    height: 88px;
+  }
+  .lp--hitoke .lp-badges3 strong {
+    font-size: 22px;
+  }
+}
+
+/* 5. 処分方法くらべ: カードにヘッダー帯をつけて対比を明確に（参考: 他社/当社の対比） */
+.lp-compare3 li {
+  padding: 0 0 14px;
+  overflow: hidden;
+}
+.lp-compare3__head {
+  display: block;
+  background: #8c98a8;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 900;
+  padding: 8px 10px;
+  margin: 0 0 10px;
+  letter-spacing: 0.02em;
+}
+.lp-compare3 li.is-astra .lp-compare3__head {
+  background: var(--lp-orange);
+  color: #fff;
+}
+.lp-compare3 li.is-astra b {
+  color: #fff;
+}
+.lp-compare3__fig {
+  margin: 0 auto 8px;
+}
+.lp-compare3 span {
+  padding: 0 12px;
+}
+
+/* ===== 文字量の削減（hitoke） ===== */
+
+/* 理由: 一言見出しを大きく、説明文は補足に落とす */
+.lp--hitoke .lp-reasons li {
+  gap: 12px;
+  align-items: flex-start;
+}
+.lp-reasons__body {
+  flex: 1;
+  min-width: 0;
+}
+.lp-reasons__head {
+  display: block;
+  font-size: 17px;
+  font-weight: 900;
+  line-height: 1.4;
+  color: var(--lp-text);
+  margin-bottom: 2px;
+}
+.lp--hitoke .lp-reasons p {
+  font-size: 13px;
+  line-height: 1.75;
+  color: var(--lp-muted);
+}
+.lp--hitoke .lp-reasons__fig {
+  width: 40px;
+  height: 40px;
+}
+
+/* 長文の折りたたみ */
+.lp-more {
+  margin: 10px 0 0;
+  text-align: left;
+}
+.lp-more > summary {
+  cursor: pointer;
+  list-style: none;
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--lp-muted);
+  text-align: center;
+  padding: 6px 0;
+}
+.lp-more > summary::-webkit-details-marker {
+  display: none;
+}
+.lp-more > summary::after {
+  content: " ▼";
+  font-size: 10px;
+}
+.lp-more[open] > summary::after {
+  content: " ▲";
+}
+.lp-more > p {
+  font-size: 13.5px;
+  line-height: 1.9;
+  color: var(--lp-muted);
+  margin: 0 0 4px;
+}
+.lp-more--plain > summary {
+  text-align: left;
+  padding: 4px 0 0;
+}
+
+/* リサイクル法: 要点を1行の太字に */
+.lp-law__head {
+  display: block;
+  font-size: 15.5px;
+  font-weight: 900;
+  line-height: 1.6;
+}
+
+/* 信頼ポイント3連（長文の置き換え） */
+.lp-trustpoints {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  list-style: none;
+  padding: 0;
+  margin: 14px 0 0;
+}
+.lp-trustpoints li {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 12px;
+  padding: 12px 6px 10px;
+  text-align: center;
+}
+.lp-trustpoints svg {
+  width: 32px;
+  height: 32px;
+  display: block;
+  margin: 0 auto 6px;
+}
+.lp-trustpoints svg [stroke] {
+  stroke: #ffd76a;
+}
+.lp-trustpoints svg [fill="#fff3d0"],
+.lp-trustpoints svg [fill="#fff"] {
+  fill: rgba(255, 215, 106, 0.16);
+}
+.lp-trustpoints svg [fill="#ffc53d"] {
+  fill: #ffd76a;
+}
+.lp-trustpoints b {
+  font-size: 12px;
+  font-weight: 800;
+  line-height: 1.45;
+  color: #fff;
+}
+
+/* 料金: お見積もりの流れ（長文の置き換え） */
+.lp-priceflow {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  list-style: none;
+  padding: 16px 14px 14px;
+  margin: 0 0 20px;
+  background: #fff;
+  border: 1px solid var(--lp-line);
+  border-radius: 14px;
+  counter-reset: pf;
+}
+.lp-priceflow > li {
+  position: relative;
+  text-align: center;
+  background: var(--lp-amber-bg);
+  border-radius: 12px;
+  padding: 12px 6px 10px;
+}
+.lp-priceflow > li::before {
+  counter-increment: pf;
+  content: counter(pf);
+  position: absolute;
+  top: -6px;
+  left: 8px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--lp-navy);
+  color: #ffd76a;
+  font-size: 12px;
+  font-weight: 800;
+  line-height: 20px;
+}
+.lp-priceflow svg {
+  display: block;
+  width: 46px;
+  height: auto;
+  margin: 0 auto 4px;
+}
+.lp-priceflow b {
+  display: block;
+  font-size: 12.5px;
+  font-weight: 900;
+  line-height: 1.35;
+}
+.lp-priceflow span {
+  display: block;
+  font-size: 11px;
+  color: var(--lp-muted);
+  line-height: 1.4;
+}
+.lp-priceflow li.is-goal b {
+  color: var(--lp-red);
+}
+.lp-priceflow__arrow {
+  display: none;
+}
+.lp-priceflow__note {
+  grid-column: 1 / -1;
+  margin: 10px 0 0;
+  font-size: 12px;
+  line-height: 1.7;
+  color: var(--lp-muted);
+  text-align: center;
+}
+
+/* 見出しが重複して省略された行は、本文を通常サイズに戻す */
+.lp--hitoke .lp-reasons p.lp-reasons__solo {
+  font-size: 14.5px;
+  color: var(--lp-text);
+  font-weight: 700;
+}

@@ -41,7 +41,7 @@ export default function Footer() {
       </div>
       <div className="tel">
         <a href="tel:0120709333">0120-709-333</a>
-        <span className="txt">受付時間：年中無休 24時間 即日対応</span>
+        <span className="txt">受付時間：年中無休・即日対応</span>
       </div>
       <p className="address sp">〒555-0012　大阪府大阪市西淀川区御幣島4-10-17</p>
       <p className="copyright">Copyright (C) 不用品回収・遺品整理アストラ All Rights Reserved.</p>

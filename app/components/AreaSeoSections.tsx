@@ -55,7 +55,7 @@ export default function AreaSeoSections({
     ],
     [
       "どのくらいで来てもらえますか？",
-      `${city}を含む関西全域で即日対応が可能です。電話受付は24時間年中無休、日時指定もOKです。お引っ越しの退去日などお急ぎの場合も、まずはお電話でご相談ください。`,
+      `${city}を含む関西全域で即日対応が可能です。電話受付は年中無休、日時指定もOKです。お引っ越しの退去日などお急ぎの場合も、まずはお電話でご相談ください。`,
     ],
     [
       "冷蔵庫や洗濯機などの家電も回収できますか？",
@@ -232,7 +232,7 @@ export default function AreaSeoSections({
           </p>
           <a href={TEL_HREF} className="area-seo__tel">
             {TEL}
-            <span>通話料無料・24時間365日受付・お見積もりだけでもOK</span>
+            <span>通話料無料・年中無休で受付・お見積もりだけでもOK</span>
           </a>
         </div>
       </div>
