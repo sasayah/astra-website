@@ -71,7 +71,7 @@ function IcoLine({ className = "" }: { className?: string }) {
 function TelButton() {
   return (
     <a className="lp-tel" href={TEL_HREF}>
-      <span className="lp-tel__hint">通話料無料・年中無休で受付</span>
+      <span className="lp-tel__hint">通話料無料・8:00〜20:00受付</span>
       <span className="lp-tel__num">
         <IcoPhone className="lp-tel__ico" />
         {TEL}
@@ -164,7 +164,7 @@ export default function LpTemplate({ item, city }: { item: LpItem; city?: LpCity
             <>
               <LpHeroVisual itemSlug={item.slug} itemName={item.name} />
               <LpBadges3 wide={wide} />
-              <p className="lp-badges3__note">年中無休で受付・日時指定OK・{area}全域対応</p>
+              <p className="lp-badges3__note">8:00〜20:00受付・日時指定OK・{area}全域対応</p>
             </>
           ) : (
             <>
@@ -230,7 +230,7 @@ export default function LpTemplate({ item, city }: { item: LpItem; city?: LpCity
             {hitoke ? <UtilIcon name="phone" className="lp-stats__fig" /> : null}
             <span className="lp-stats__label">電話受付</span>
             <span className="lp-stats__value">
-              年中無休
+              8:00〜20:00
             </span>
           </div>
         </div>
@@ -681,7 +681,7 @@ export default function LpTemplate({ item, city }: { item: LpItem; city?: LpCity
           <IcoPhone className="lp-sticky__ico" />
           <span>
             <strong>{TEL}</strong>
-            <small>タップで電話・年中無休</small>
+            <small>タップで電話・8:00〜20:00</small>
           </span>
         </a>
         <a href={LINE_URL} target="_blank" rel="noopener" className="lp-sticky__line">

@@ -45,7 +45,7 @@ function TelBlock() {
     <div className="lpb-telblock">
       <p className="lpb-telblock__lead">お急ぎの方はお電話が最速です</p>
       <a className="lp-tel" href={TEL_HREF}>
-        <span className="lp-tel__hint">通話料無料・年中無休で受付</span>
+        <span className="lp-tel__hint">通話料無料・8:00〜20:00受付</span>
         <span className="lp-tel__num">
           <IcoPhone className="lp-tel__ico" />
           {TEL}
@@ -468,7 +468,7 @@ export default function LpTemplateB({ item, city }: { item: LpItem; city?: LpCit
           <IcoPhone className="lp-sticky__ico" />
           <span>
             <strong>{TEL}</strong>
-            <small>タップで電話・年中無休</small>
+            <small>タップで電話・8:00〜20:00</small>
           </span>
         </a>
         <a href={LINE_URL} target="_blank" rel="noopener" className="lp-sticky__line">

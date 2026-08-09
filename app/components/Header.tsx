@@ -28,7 +28,7 @@ export default function Header() {
               </div>
               <div className="telBox">
                 <a href="tel:0120709333">0120-709-333</a>
-                <span className="txt">受付時間：年中無休・即日対応</span>
+                <span className="txt">受付時間：年中無休 8:00〜20:00</span>
               </div>
               <div className="contact">
                 <a href="/contact">
@@ -63,7 +63,7 @@ export default function Header() {
         <div className="spBarBtns sp">
           <a href="tel:0120709333" className="spBtnTel">
             <span className="l1">お電話</span>
-            <span className="l2">年中無休</span>
+            <span className="l2">8:00〜20:00</span>
           </a>
           <a href="/contact" className="spBtnMail">
             <span className="l1">無料相談</span>
@@ -96,7 +96,7 @@ export default function Header() {
         <div className="tel">
           <a href="tel:0120709333">
             <div style={{ display: "none" }}>0120-709-333</div>
-            <img src={`${TPL}/img/common/sp_tel.png`} width={268} alt="0120-709-333 受付時間：年中無休・即日対応" />
+            <img src={`${TPL}/img/common/sp_tel.png`} width={268} alt="0120-709-333 受付時間：年中無休 8:00〜20:00" />
           </a>
         </div>
         <div className="close"><a href="#"><img src={`${TPL}/img/common/close.png`} alt="CLOSE" width={58} /></a></div>

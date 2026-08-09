@@ -245,7 +245,7 @@ const SHORT_LABELS: Record<IconName, string> = {
   stairs: "搬出までまるごと",
   truck: "まとめて回収OK",
   calendar: "日時のご指定OK",
-  phone: "年中無休で受付",
+  phone: "8:00〜20:00受付",
   card: "クレジット払いOK",
   broom: "簡単なお掃除つき",
   shield: "ていねいに養生",
