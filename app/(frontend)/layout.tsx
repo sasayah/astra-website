@@ -3,6 +3,7 @@ import Script from "next/script";
 import Header from "@/app/components/Header";
 import Footer from "@/app/components/Footer";
 import ContactForms from "@/app/components/ContactForms";
+import ModalTriggers from "@/app/components/ModalTriggers";
 import Analytics from "@/app/components/Analytics";
 import YahooTag from "@/app/components/YahooTag";
 import "./globals.css";
@@ -75,6 +76,7 @@ export default function RootLayout({
           <Footer />
         </div>
         <ContactForms />
+        <ModalTriggers />
 
         {/* jQuery を先に確定ロード → プラグインを afterInteractive で登録 →
             それらに依存する common.js は lazyOnload で最後に実行（matchHeight未定義エラー回避）。 */}
