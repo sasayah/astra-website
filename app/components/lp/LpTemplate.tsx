@@ -1,5 +1,5 @@
 import type { LpCity, LpItem } from "@/app/lib/lp-data";
-import { lpCopy } from "@/app/lib/lp-data";
+import { lpCopy, priceOf } from "@/app/lib/lp-data";
 import LpDisposalOptions from "@/app/components/lp/LpDisposalOptions";
 import { voicesForItem } from "@/app/lib/voices";
 import GoogleRatingBadge from "@/app/components/GoogleRatingBadge";
@@ -110,6 +110,8 @@ export default function LpTemplate({ item, city }: { item: LpItem; city?: LpCity
   ];
   // 「人っけ」A/B（アストくん）。対象品目は lp-hitoke.ts で管理
   const hitoke = hitokeEnabled(item.slug);
+  // 料金目安（lp-data.ts SINGLE_ITEM_PRICES。比較表と同じ数字をファーストビューにも出す）
+  const price = priceOf(item.slug);
   // 大阪市役所での紹介 = 最大の信用。hitoke時はヒーロー直下に置く
   const trustSection = (
     <section className={hitoke ? "lp-sec lp-sec--trust" : "lp-sec lp-sec--tint"}>
@@ -165,6 +167,21 @@ export default function LpTemplate({ item, city }: { item: LpItem; city?: LpCity
               <LpHeroVisual itemSlug={item.slug} itemName={item.name} />
               <LpBadges3 wide={wide} />
               <p className="lp-badges3__note">7:00〜21:00受付・日時指定OK・{area}全域対応</p>
+              {price ? (
+                <p className="lp-hero__price">
+                  {wide ? (
+                    <>
+                      軽トラ積み放題 <strong>{price.price}</strong>（目安）
+                    </>
+                  ) : (
+                    <>
+                      {item.name}1点の回収 <strong>{price.price}</strong>（目安）
+                    </>
+                  )}
+                  {price.note ? <small>{price.note}</small> : null}
+                  <small>作業前に確定金額をご提示・追加料金0円</small>
+                </p>
+              ) : null}
             </>
           ) : (
             <>

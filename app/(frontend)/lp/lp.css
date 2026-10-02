@@ -1494,6 +1494,28 @@
   margin: 0 0 16px;
 }
 
+/* ファーストビューの料金目安（比較表と同じ数字。価格意図の検索に先に答える） */
+.lp-hero__price {
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--lp-text);
+  margin: -6px 0 16px;
+  line-height: 1.5;
+}
+.lp-hero__price strong {
+  font-size: 22px;
+  font-weight: 900;
+  color: var(--lp-red);
+  margin: 0 2px;
+}
+.lp-hero__price small {
+  display: block;
+  font-size: 11.5px;
+  font-weight: 700;
+  color: var(--lp-muted);
+}
+
 /* セクション内のキャラ吹き出し */
 .lp-asto-note {
   display: flex;
